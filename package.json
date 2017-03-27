@@ -1,0 +1,29 @@
+{
+  "name": "generator-voxa-skill",
+  "version": "0.0.0",
+  "description": "Voxa skill template generator",
+  "author": {
+    "name": "Carlos A. Vaca Morales",
+    "email": "carlosv@rain.agency",
+    "url": ""
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "app/index.js",
+  "keywords": [
+    "yeoman-generator",
+    "alexa-skill"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "repository": "cvaca7/generator-skill",
+  "scripts": {
+    "test": "mocha"
+  },
+  "license": "MIT"
+}
