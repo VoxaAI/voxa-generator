@@ -1,4 +1,4 @@
-# Voxa skill generator
+# <%= name %>
 
 ### Development Setup
 

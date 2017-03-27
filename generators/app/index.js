@@ -43,9 +43,11 @@ module.exports = Generator.extend({
         this.templatePath('gulpfile.js'),
         this.destinationPath('gulpfile.js')
       );
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('README.md'),
-        this.destinationPath('README.md')
+        this.destinationPath('README.md'), {
+          name: this.props.name
+        }
       );
       this.fs.copy(
         this.templatePath('server.js'),
