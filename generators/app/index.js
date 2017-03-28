@@ -1,60 +1,39 @@
 'use strict';
 
-const Generator = require('yeoman-generator');
-const _ = require('lodash');
+const
+  Generator = require('yeoman-generator'),
+  _ = require('lodash');
+let
+  questions = require('./resources/prompts'),
+  initialPrompt = questions.initialPrompt,
+  secondPrompt = questions.secondPrompt;
 
-let firsQuestions = [
-  {
-    type    : 'input',
-    name    : 'name',
-    message : 'Please enter your project name',
-    default : ''// Default to current folder name
-  }, {
-    type    : 'input',
-    name    : 'author',
-    message : 'Please enter your name/company?',
-    default: 'Author'
-  },{
-    type    : 'confirm',
-    name    : 'subDirConfim',
-    message : 'Would you like to create the project inside a new directory?',
-    default: true
-  }
-];
+function setPrompts(answers){
+  _.set(secondPrompt[0],'default', answers.name);
 
-let secondQuestions = [
-  {
-    type    : 'input',
-    name    : 'subDir',
-    message : 'Please enter your directory name',
-    default: ''
+  if(answers.subDirConfim){
+    return this.prompt(secondPrompt)
+      .then((res)=>{
+        _.set(answers,'subDir', res.subDir);
+        return answers;
+      });
   }
-];
+
+  return answers;
+}
+function finishPrompts(answers){
+  this.props = answers;
+}
 
 module.exports = Generator.extend({
 
   // Configurations will be loaded here.
   // Ask for user input
   prompting() {
-    _.set(firsQuestions[0],'default', this.appname);
-    return this.prompt(firsQuestions)
-      .then((answers)=>{
-        _.set(secondQuestions[0],'default', answers.name);
-
-        if(answers.subDirConfim){
-          return this.prompt(secondQuestions)
-            .then((res)=>{
-              _.set(answers,'subDir', res.subDir);
-              return answers;
-            });
-        }
-
-        return answers;
-      })
-      .then((answers)=>{
-        console.log('answers: ', answers);
-        this.props = answers;
-      });
+    _.set(initialPrompt[0],'default', this.appname);
+    return this.prompt(initialPrompt)
+      .then(setPrompts.bind(this))
+      .then(finishPrompts.bind(this));
   },
 
   // Writing Logic here
