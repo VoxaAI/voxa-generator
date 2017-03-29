@@ -28,4 +28,25 @@ let secondPrompt = [
   }
 ];
 
-module.exports = { initialPrompt, secondPrompt };
+let pluginsPrompt = [
+  {
+    type: 'confirm',
+    name: 'cloud-watch',
+    message: 'Would you like to install the Cloud-watch plugin?',
+    default: false
+  },
+  {
+    type: 'confirm',
+    name: 'state-flow',
+    message: 'Would you like to install the State-flow plugin?',
+    default: false
+  },
+  {
+    type: 'confirm',
+    name: 'autoload',
+    message: 'Would you like to install the autoload plugin?',
+    default: false
+  }
+];
+
+module.exports = { initialPrompt, secondPrompt, pluginsPrompt };

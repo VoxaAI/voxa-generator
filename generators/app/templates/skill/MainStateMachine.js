@@ -8,4 +8,8 @@ const states = require('./states');
 
 const skill = new Voxa({variables, views});
 states.register(skill);
+
+/*******  plugins  *******/
+//In this line the plugins will be added
+
 module.exports = skill;
