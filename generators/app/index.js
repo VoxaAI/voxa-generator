@@ -89,16 +89,28 @@ module.exports = Generator.extend({
     config: function () {
       this.dir = this.props.subDirConfim ? this.props.subDir + '/' : '';
 
+      this.fs.copy(
+        this.templatePath('.editorconfig'),
+        this.destinationPath(this.dir + '.editorconfig')
+      );
+      this.fs.copy(
+        this.templatePath('.eslintrc.json'),
+        this.destinationPath(this.dir + '.eslintrc.json')
+      );
+      this.fs.copy(
+        this.templatePath('.gitignore'),
+        this.destinationPath(this.dir + '.gitignore')
+      );
+      this.fs.copy(
+        this.templatePath('.nvmrc'),
+        this.destinationPath(this.dir + '.nvmrc')
+      );
       this.fs.copyTpl(
         this.templatePath('_package.json'),
         this.destinationPath(this.dir + 'package.json'), {
           name: this.props.name,
           author: this.props.author
         }
-      );
-      this.fs.copy(
-        this.templatePath('.nvmrc'),
-        this.destinationPath(this.dir + '.nvmrc')
       );
       this.fs.copy(
         this.templatePath('gulpfile.js'),
