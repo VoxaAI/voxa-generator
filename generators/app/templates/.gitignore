@@ -83,3 +83,8 @@ jspm_packages
 /www/public
 /config/local.json
 .serverless
+
+#### Environment
+
+#WebStorm
+.idea
