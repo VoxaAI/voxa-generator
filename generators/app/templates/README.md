@@ -6,6 +6,7 @@
 * Run `npm install`
 * Edit `config/local.json` with all of the requisite fields.
 
+`npm install` will install the project dependencies
 `npm run watch` will start the server and watch for changes.
 
 
@@ -21,3 +22,5 @@
 	`serverless.yml` -> Serverless configuration
 	`package.json` -> Dependencies
 	`README.md`
+
+
