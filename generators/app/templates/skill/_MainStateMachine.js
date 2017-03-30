@@ -10,6 +10,6 @@ const skill = new Voxa({variables, views});
 states.register(skill);
 
 /*******  plugins  *******/
-//In this line the plugins will be added
+/*****  plugins end *****/
 
 module.exports = skill;

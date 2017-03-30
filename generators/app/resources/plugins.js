@@ -1,24 +1,23 @@
 'use strict';
-let plugins = [
+module.exports = [
   {
     name: 'autoload',
-    usage: 'Voxa.plugins.autoLoad(skill, { adapter });'
+    usage: `const adapter = {};
+Voxa.plugins.autoLoad(skill, { adapter });`
   },
   {
     name: 'state-flow',
-    usage: 'alexa.plugins.stateFlow.register(skill)'
+    usage: 'Voxa.plugins.stateFlow.register(skill);'
   },
   {
     name: 'cloud-watch',
-    dependencies: 'const AWS = require("aws-sdk");',
-    usage: `const cloudWatch = new AWS.CloudWatch({});
-    const eventMetric = {
-      MetricName: 'Caught Error', // Name of your metric
-      Namespace: 'SkillName' // Name of your skill
-    };
-    
-    Voxa.plugins.cloudwatch(skill, cloudWatch, eventMetric);`
+    usage: `const AWS = require("aws-sdk");
+const cloudWatch = new AWS.CloudWatch({});
+const eventMetric = {
+  MetricName: 'Caught Error', // Name of your metric
+  Namespace: 'SkillName' // Name of your skill
+};
+
+Voxa.plugins.cloudwatch(skill, cloudWatch, eventMetric);`
   }
 ];
-
-module.exports = {};

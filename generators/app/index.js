@@ -9,7 +9,7 @@ let
   secondPrompt = questions.secondPrompt,
   pluginsPrompt = questions.pluginsPrompt;
 
-let plugins = require('./resources/plugins');
+const _plugins = require('./resources/plugins');
 
 function setPrompts(answers){
   _.set(secondPrompt[0],'default', answers.name);
@@ -32,45 +32,33 @@ function setPlugins(answers){
     });
 }
 function finishPrompts(answers){
-  let plugins = answers.plugins;
-  console.log('plugins :', plugins);
-  //var that = this;
-  /*
-  _.forIn(plugins, function(val, key){
-    if(val){
-      addPlugin(key).bind(that);
-    }
-  });
-  */
+  let plugins = answers.plugins,
+  path =  this.templatePath('skill/_MainStateMachine.js'),
+  newPath =  this.templatePath('skill/MainStateMachine.js'),
+  filerBuffer   = this.fs.read(path),
+  hook  = '/*******  plugins  *******/',
+  newBuffer = '';
+
+  if(_.keys(answers).length > 0){
+     _.forIn(plugins, (val, key) =>{
+        if(val){
+          let i = _.findIndex(_plugins,{name: key} ), 
+          usage = _plugins[i].usage;
+
+          //inserting usage
+          newBuffer += usage + '\n\n';
+          console.log(`plugin ${key} added`);
+        }
+      });
+
+      newBuffer = filerBuffer.replace(hook, hook + '\n' + newBuffer + '\n');
+      this.fs.write(newPath,newBuffer);
+      console.log('NEW BUFFER');
+  } 
   this.props = answers;
 }
 
 
-function addPlugin(plugin){
-
-  //let hook   = '/*******  plugins  *******/',
-  /*  path   = 'skill/_MainStateMachine.js',
-    file   = this.read(path),
-    i = _.indexOf(plugins,'name.' + plugin),
-    dependencies = plugins[i].dependencies,
-    usage = plugins[i].usage;
-
-  console.log('i ', i);
-  console.log('dependencies ', dependencies);
-  console.log('usage ', usage);
-
-  //inserting dependencies
-  if (file.indexOf(dependencies) === -1) {
-   this.write(path, file.replace(hook, dependencies + '\n' + hook));
-  }
-
-  //inserting usage
-  if (file.indexOf(usage) === -1) {
-   this.write(path, file.replace(hook, usage + '\n' + hook));
-  }
-  */
-  console.log(`plugin ${plugin} added`);
-}
 module.exports = Generator.extend({
 
   // Configurations will be loaded here.
@@ -79,7 +67,7 @@ module.exports = Generator.extend({
     _.set(initialPrompt[0],'default', this.appname);
     return this.prompt(initialPrompt)
       .then(setPrompts.bind(this))
-      //.then(setPlugins.bind(this))
+      .then(setPlugins.bind(this))
       .then(finishPrompts.bind(this));
   },
 
@@ -154,6 +142,10 @@ module.exports = Generator.extend({
         this.templatePath('test'),
         this.destinationPath(this.dir + 'test')
       );
+
+      //Deleting unnecessary files created
+      this.fs.delete(this.templatePath('skill/MainStateMachine.js'));
+      this.fs.delete(this.destinationPath(this.dir + 'skill/_MainStateMachine.js'));
     },
 
     // Install Dependencies if wanted
