@@ -1,10 +1,10 @@
 {
   "name": "generator-voxa-skill",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "Voxa skill template generator",
   "author": {
-    "name": "Carlos A. Vaca Morales",
-    "email": "carlosv@rain.agency",
+    "name": "Rain Agency",
+    "email": "npm@rain.agency",
     "url": ""
   },
   "engines": {
@@ -25,7 +25,7 @@
   "devDependencies": {
     "mocha": "*"
   },
-  "repository": "cvaca7/generator-skill",
+  "repository": "mediarain/generator-alexa-skill",
   "scripts": {
     "test": "mocha"
   },
