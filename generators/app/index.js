@@ -35,15 +35,22 @@ function finishPrompts(answers){
   let plugins = answers.plugins,
   path =  this.templatePath('skill/_MainStateMachine.js'),
   newPath =  this.templatePath('skill/MainStateMachine.js'),
+  
   jsonPath = this.templatePath('_package.json'),
   jsonNewPath = this.templatePath('package.json'),
   jsonFile = JSON.parse(this.fs.read(jsonPath)),
+
+  envPath = this.templatePath('config/local.json.example'),
+  envNewPath = this.templatePath('config/local.json'),
+  envFile = JSON.parse(this.fs.read(envPath)),
+  
   filerBuffer   = this.fs.read(path),
   hook  = '/*******  plugins  *******/',
   newBuffer = '',
-  arrFiles = [];
 
-  let dir = answers.subDirConfim ? answers.subDir + '/' : '';
+  arrFiles = [],
+
+  dir = answers.subDirConfim ? answers.subDir + '/' : '';
   _.set(answers,'dir', dir);
   
   if(_.keys(answers).length > 0){
@@ -52,7 +59,8 @@ function finishPrompts(answers){
           let i = _.findIndex(_plugins,{name: key} ), 
           usage = _plugins[i].usage,
           dependencies = _plugins[i].dependencies,
-          files = _plugins[i].files;
+          files = _plugins[i].files,
+          env = _plugins[i].env;
 
           if(dependencies){
             _.forEach(dependencies, function(item){
@@ -61,10 +69,19 @@ function finishPrompts(answers){
           }
 
           if(files){
-            _.forEach(files, function(item){
+            _.forEach(files, (item) =>{
               arrFiles.push(item);
             });
           }
+
+          if(env){
+            _.forEach(env, (item) =>{
+              _.mapKeys(item, (value, key) => {
+                _.set(envFile, key, value);  
+              });
+            });
+          }
+
           //inserting usage
           newBuffer += usage + '\n\n';
           console.log(`plugin ${key} added`);
@@ -82,8 +99,11 @@ function finishPrompts(answers){
   if(arrFiles.length > 0){
     _.set(answers,'services', arrFiles);  
   }
-
-  console.log(answers);
+  
+  _.set(answers,'env', envFile);  
+  this.fs.write(envNewPath, JSON.stringify(envFile, null, '\t'));
+  
+  console.log('answers ', answers);
   this.props = answers;
 }
 
@@ -160,7 +180,6 @@ module.exports = Generator.extend({
 
       if(this.props.services){
         _.forEach(this.props.services, (item) =>{
-          console.log('item ',item);
           this.fs.copy(
             this.templatePath(item),
             this.destinationPath(this.props.dir + item)
@@ -191,6 +210,7 @@ module.exports = Generator.extend({
       //Deleting unnecessary files created
       this.fs.delete(this.templatePath('skill/MainStateMachine.js'));
       this.fs.delete(this.destinationPath(this.props.dir + 'skill/_MainStateMachine.js'));
+      this.fs.delete(this.destinationPath(this.props.dir + 'config/local.json.example'));
     },
 
     // Install Dependencies if wanted

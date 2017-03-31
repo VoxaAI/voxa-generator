@@ -15,13 +15,27 @@ module.exports = [
     files: [
       'services/UserStorage.js'
     ],
+    env: [
+      {
+        'dynamoDB' : {
+          'tables' : {
+            'users' : ''
+          }
+        }
+      },
+      {
+        'aws' : {
+          'region' : 'us-east-1'
+        }
+      }
+    ],
     usage: `const UserStorage = require('../services/userStorage');
 const adapter = new UserStorage();
 Voxa.plugins.autoLoad(skill, { adapter });`
   },
   {
     name: 'state-flow',
-    usage: 'Voxa.plugins.stateFlow.register(skill);'
+    usage: 'Voxa.plugins.stateFlow(skill);'
   },
   {
     name: 'cloud-watch',
@@ -31,6 +45,13 @@ Voxa.plugins.autoLoad(skill, { adapter });`
         version: '^2.7.23'
       }
     ],
+    env: [
+      {
+        'aws' : {
+          'region' : 'us-east-1'
+        }
+      }
+    ],
     usage: `const AWS = require("aws-sdk");
 const cloudWatch = new AWS.CloudWatch({});
 const eventMetric = {
@@ -38,6 +59,6 @@ const eventMetric = {
   Namespace: 'SkillName' // Name of your skill
 };
 
-Voxa.plugins.cloudwatch(skill, cloudWatch, eventMetric);`
+Voxa.plugins.cloudWatch(skill, cloudWatch, eventMetric);`
   }
 ];
