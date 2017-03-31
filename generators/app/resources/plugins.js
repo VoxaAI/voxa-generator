@@ -12,6 +12,9 @@ module.exports = [
         version: '^1.0.0'
       }
     ],
+    files: [
+      'services/UserStorage.js'
+    ],
     usage: `const UserStorage = require('../services/userStorage');
 const adapter = new UserStorage();
 Voxa.plugins.autoLoad(skill, { adapter });`
