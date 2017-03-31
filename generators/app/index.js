@@ -35,6 +35,10 @@ function finishPrompts(answers){
   let plugins = answers.plugins,
   path =  this.templatePath('skill/_MainStateMachine.js'),
   newPath =  this.templatePath('skill/MainStateMachine.js'),
+
+  configPath = this.templatePath('config/_index.js'),
+  configNewPath = this.templatePath('config/index.js'),
+  configFile = this.fs.read(configPath),
   
   jsonPath = this.templatePath('_package.json'),
   jsonNewPath = this.templatePath('package.json'),
@@ -47,6 +51,7 @@ function finishPrompts(answers){
   filerBuffer   = this.fs.read(path),
   hook  = '/*******  plugins  *******/',
   newBuffer = '',
+  configBuffer = '',
 
   arrFiles = [],
 
@@ -60,7 +65,12 @@ function finishPrompts(answers){
           usage = _plugins[i].usage,
           dependencies = _plugins[i].dependencies,
           files = _plugins[i].files,
-          env = _plugins[i].env;
+          env = _plugins[i].env,
+          config = _plugins[i].config;
+
+          if(config){
+            configBuffer += config + '\n\n';
+          }
 
           if(dependencies){
             _.forEach(dependencies, function(item){
@@ -90,7 +100,11 @@ function finishPrompts(answers){
 
       //creating MainStateMachine
       newBuffer = filerBuffer.replace(hook, hook + '\n' + newBuffer + '\n');
-      this.fs.write(newPath,newBuffer);
+      this.fs.write(newPath, newBuffer);
+
+      //creating config/index.js
+      configBuffer = configFile.replace(hook, hook + '\n' + configBuffer + '\n');
+      this.fs.write(configNewPath, configBuffer);
 
       //creating package.json
       this.fs.write(jsonNewPath,JSON.stringify(jsonFile, null, '\t'));
@@ -211,6 +225,8 @@ module.exports = Generator.extend({
       this.fs.delete(this.templatePath('skill/MainStateMachine.js'));
       this.fs.delete(this.destinationPath(this.props.dir + 'skill/_MainStateMachine.js'));
       this.fs.delete(this.destinationPath(this.props.dir + 'config/local.json.example'));
+      this.fs.delete(this.templatePath('config/index.js'));
+      this.fs.delete(this.destinationPath(this.props.dir + 'config/_index.js'));
     },
 
     // Install Dependencies if wanted
