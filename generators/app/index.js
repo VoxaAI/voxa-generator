@@ -152,7 +152,7 @@ module.exports = Generator.extend({
         this.destinationPath(this.props.dir + '.eslintrc.json')
       );
       this.fs.copy(
-        this.templatePath('.gitignore'),
+        this.templatePath('_gitignore'),
         this.destinationPath(this.props.dir + '.gitignore')
       );
       this.fs.copy(
