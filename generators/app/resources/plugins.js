@@ -2,7 +2,18 @@
 module.exports = [
   {
     name: 'autoload',
-    usage: `const adapter = {};
+    dependencies: [
+      {
+        name: 'aws-sdk',
+        version: '^2.7.23'
+      },
+      {
+        name: 'dynamodb-doc',
+        version: '^1.0.0'
+      }
+    ],
+    usage: `const UserStorage = require('../services/userStorage');
+const adapter = new UserStorage();
 Voxa.plugins.autoLoad(skill, { adapter });`
   },
   {
@@ -11,6 +22,12 @@ Voxa.plugins.autoLoad(skill, { adapter });`
   },
   {
     name: 'cloud-watch',
+    dependencies: [
+      {
+        name: 'aws-sdk',
+        version: '^2.7.23'
+      }
+    ],
     usage: `const AWS = require("aws-sdk");
 const cloudWatch = new AWS.CloudWatch({});
 const eventMetric = {

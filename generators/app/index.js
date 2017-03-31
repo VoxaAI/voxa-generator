@@ -35,15 +35,26 @@ function finishPrompts(answers){
   let plugins = answers.plugins,
   path =  this.templatePath('skill/_MainStateMachine.js'),
   newPath =  this.templatePath('skill/MainStateMachine.js'),
+  jsonPath = this.templatePath('_package.json'),
+  jsonNewPath = this.templatePath('package.json'),
+  jsonFile = JSON.parse(this.fs.read(jsonPath)),
   filerBuffer   = this.fs.read(path),
   hook  = '/*******  plugins  *******/',
   newBuffer = '';
-
+  
   if(_.keys(answers).length > 0){
      _.forIn(plugins, (val, key) =>{
         if(val){
           let i = _.findIndex(_plugins,{name: key} ), 
-          usage = _plugins[i].usage;
+          usage = _plugins[i].usage,
+          dependencies = _plugins[i].dependencies;
+
+          if(dependencies){
+            //check if the dependencie exist
+            _.forEach(dependencies, function(item){
+              _.set(jsonFile,`dependencies.${item.name}`,item.version); 
+            });
+          }
 
           //inserting usage
           newBuffer += usage + '\n\n';
@@ -51,9 +62,12 @@ function finishPrompts(answers){
         }
       });
 
+      //creating MainStateMachine
       newBuffer = filerBuffer.replace(hook, hook + '\n' + newBuffer + '\n');
       this.fs.write(newPath,newBuffer);
-      console.log('NEW BUFFER');
+
+      //creating package.json
+      this.fs.write(jsonNewPath,JSON.stringify(jsonFile, null, '\t'));
   } 
   this.props = answers;
 }
@@ -94,7 +108,7 @@ module.exports = Generator.extend({
         this.destinationPath(this.dir + '.nvmrc')
       );
       this.fs.copyTpl(
-        this.templatePath('_package.json'),
+        this.templatePath('package.json'),
         this.destinationPath(this.dir + 'package.json'), {
           name: this.props.name,
           author: this.props.author
@@ -118,6 +132,9 @@ module.exports = Generator.extend({
         this.templatePath('serverless.yml'),
         this.destinationPath(this.dir + 'serverless.yml')
       );
+
+      //Deleting unnecessary files created
+      this.fs.delete(this.templatePath('package.json'));
     },
 
     // Copy application files
