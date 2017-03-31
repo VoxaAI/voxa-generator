@@ -46,6 +46,8 @@ function finishPrompts(answers){
 
   envPath = this.templatePath('config/local.json.example'),
   envNewPath = this.templatePath('config/local.json'),
+  stagNewPath = this.templatePath('config/staging.json'),
+  prodNewPath = this.templatePath('config/production.json'),
   envFile = JSON.parse(this.fs.read(envPath)),
   
   filerBuffer   = this.fs.read(path),
@@ -116,6 +118,8 @@ function finishPrompts(answers){
   
   _.set(answers,'env', envFile);  
   this.fs.write(envNewPath, JSON.stringify(envFile, null, '\t'));
+  this.fs.write(stagNewPath, JSON.stringify(envFile, null, '\t'));
+  this.fs.write(prodNewPath, JSON.stringify(envFile, null, '\t'));
   
   console.log('answers ', answers);
   this.props = answers;
@@ -224,9 +228,20 @@ module.exports = Generator.extend({
       //Deleting unnecessary files created
       this.fs.delete(this.templatePath('skill/MainStateMachine.js'));
       this.fs.delete(this.destinationPath(this.props.dir + 'skill/_MainStateMachine.js'));
+
+      this.fs.delete(this.templatePath('config/local.json'));
       this.fs.delete(this.destinationPath(this.props.dir + 'config/local.json.example'));
+
+      this.fs.delete(this.templatePath('config/production.json'));
+      this.fs.delete(this.destinationPath(this.props.dir + 'config/production.json.example'));
+
+      this.fs.delete(this.templatePath('config/staging.json'));
+      this.fs.delete(this.destinationPath(this.props.dir + 'config/staging.json.example'));
+      
       this.fs.delete(this.templatePath('config/index.js'));
       this.fs.delete(this.destinationPath(this.props.dir + 'config/_index.js'));
+
+
     },
 
     // Install Dependencies if wanted
