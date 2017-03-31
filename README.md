@@ -1,5 +1,4 @@
-# generator-voxa-skill [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> generator-voxa-skill
+# generator-voxa-skill
 
 ## Installation
 
@@ -32,18 +31,3 @@ Your directory structure should look like this:
 	`serverless.yml` -> Serverless configuration
 	`package.json` -> Dependencies
 	`README.md`
-
-
-## License
-
-MIT © [Carlos A. Vaca Morales]()
-
-
-[npm-image]: https://badge.fury.io/js/generator-skill.svg
-[npm-url]: https://npmjs.org/package/generator-skill
-[travis-image]: https://travis-ci.org/cvaca7/generator-skill.svg?branch=master
-[travis-url]: https://travis-ci.org/cvaca7/generator-skill
-[daviddm-image]: https://david-dm.org/cvaca7/generator-skill.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/cvaca7/generator-skill
-[coveralls-image]: https://coveralls.io/repos/cvaca7/generator-skill/badge.svg
-[coveralls-url]: https://coveralls.io/r/cvaca7/generator-skill
