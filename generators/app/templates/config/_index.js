@@ -10,6 +10,5 @@ configFile.env = env;
 /*****  plugins end *****/
 
 
-
 module.exports = configFile;
 module.exports.asFunction = () => configFile;

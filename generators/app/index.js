@@ -96,7 +96,6 @@ function finishPrompts(answers){
 
           //inserting usage
           newBuffer += usage + '\n\n';
-          console.log(`plugin ${key} added`);
         }
       });
 
@@ -121,7 +120,6 @@ function finishPrompts(answers){
   this.fs.write(stagNewPath, JSON.stringify(envFile, null, '\t'));
   this.fs.write(prodNewPath, JSON.stringify(envFile, null, '\t'));
   
-  console.log('answers ', answers);
   this.props = answers;
 }
 

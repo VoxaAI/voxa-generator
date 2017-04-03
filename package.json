@@ -23,11 +23,15 @@
     "yeoman-generator": "^1.0.0"
   },
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.2",
+    "eslint-plugin-import": "^2.2.0",
     "mocha": "*"
   },
   "repository": "mediarain/generator-alexa-skill",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "eslint" : "node_modules/.bin/eslint generators test"
   },
   "license": "MIT"
 }

@@ -4,12 +4,12 @@ const views = (function views() {
   return {
     Intent: {
       Launch: {
-        tell: 'Welcome!'
+        tell: 'Welcome!',
       },
       Help: {
-        say: 'Some help text here.'
-      }
-    }
+        say: 'Some help text here.',
+      },
+    },
   };
 }());
 module.exports = views;

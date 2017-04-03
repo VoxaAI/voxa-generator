@@ -8,12 +8,12 @@ describe('Skill', () => {
     const event = {
       session: {
         application: {
-          applicationId: ''
-        }
+          applicationId: '',
+        },
       },
       request: {
-        type: 'LaunchRequest'
-      }
+        type: 'LaunchRequest',
+      },
     };
 
     return skill.execute(event)
