@@ -32,7 +32,7 @@ AWS.config.update(_.merge({
   },
 }, configFile.aws));`,
     files: [
-      'services/UserStorage.js'
+      'services/userStorage.js'
     ],
     env: [
       {

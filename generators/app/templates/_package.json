@@ -9,11 +9,11 @@
     "lint":"eslint config/ gulpfile.js services/ skill/ speechAssets/ test/ server.js"
   },
   "author":"<%= author %>",
-  "engines":{"node":"6.10"},
+  "engines":{"node":">=4.3.2"},
   "keywords":[
     "alexa skill",
     "skills",
-    "node.js 4.3.2",
+    "node.js >=4.3.2",
     "echo","amazon"
   ],
   "license":"ISC",
