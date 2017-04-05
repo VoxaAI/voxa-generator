@@ -1,6 +1,6 @@
 {
   "name": "generator-voxa-skill",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Voxa skill template generator",
   "author": {
     "name": "Rain Agency",
@@ -23,15 +23,18 @@
     "yeoman-generator": "^1.0.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-plugin-import": "^2.2.0",
-    "mocha": "*"
+    "mocha": "*",
+    "simple-mock": "^0.7.3"
   },
   "repository": "mediarain/generator-alexa-skill",
   "scripts": {
-    "test": "mocha",
-    "eslint" : "node_modules/.bin/eslint generators test"
+    "test": "mocha test/app.js",
+    "eslint": "node_modules/.bin/eslint generators test"
   },
   "license": "MIT"
 }
