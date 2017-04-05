@@ -2,15 +2,25 @@
 const Generator = require('../generators/app/index'),
 	helpers = require('yeoman-test'),
 	assert = require('yeoman-assert'),
-	path = require('path');
+	path = require('path'),
+	chai = require('chai'),
+    chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
+const expect = chai.expect;
 
 describe('Generator', () => {
-	beforeEach(function () {
-	  // The object returned act like a promise, so return it to wait until the process is done
-	  return helpers.run(path.join(__dirname, '../generators/app'))
-	    .withOptions({ foo: 'bar' })    // Mock options passed in
-	    .withArguments(['name'])      // Mock the arguments
-	    .withPrompts({ name: 'name', author: 'author', subDirConfim: false }); // Mock the prompt answers
-	});
+	it('Should work', () => {
+		let res = helpers.run(path.join(__dirname, '../generators/app'))
+				    .withOptions({ foo: 'bar' })    // Mock options passed in
+				    .withArguments(['arg'])      // Mock the arguments
+				    .withPrompts({ name: 'name', author: 'author', subDirConfim: false }); // Mock the prompt answers
 
+		let answers = res.answers;
+		expect(answers.name).to.equal('name');
+		expect(answers.author).to.equal('author');
+		expect(answers.subDirConfim).to.equal(false);
+		
+		expect(res.args[0]).to.equal('arg');
+	});
 });
