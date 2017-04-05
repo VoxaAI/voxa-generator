@@ -1,8 +1,8 @@
 'use strict';
 
 const Generator = require('yeoman-generator'),
-PromptHandler = require('./resources/PromptHandler');
-let handler = new PromptHandler();
+PromptHandler = require('./resources/PromptHandler'),
+handler = new PromptHandler();
 
 module.exports = Generator.extend({
 
@@ -10,19 +10,9 @@ module.exports = Generator.extend({
   // Ask for user input
   prompting() {
     return handler.initialPrompt.call(this)
-    .then((answers) =>{
-      return handler.secondPrompt.call(this, answers);
-    })
-    .then((answers) =>{
-      return handler.setPlugins.call(this, answers);
-    })
-    .then((answers) => {
-      return handler.finishPrompts.call(this,answers);
-    })
-    .then((answers) => {
-      this.props = answers;
-      console.log(this.props);
-    });
+    .then(answers => handler.secondPrompt.call(this, answers))
+    .then(answers => handler.setPlugins.call(this, answers))
+    .then(answers => handler.finishPrompts.call(this,answers));
   },
 
   // Writing Logic here

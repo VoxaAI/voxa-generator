@@ -13,6 +13,9 @@ module.exports = {
     ],
     "rules": {
         "import/no-unresolved" : "off",
+        "prefer-reflect": "off",
+        "no-tabs": "off",
+
         "accessor-pairs": "error",
         "array-bracket-spacing": [
             "error",
@@ -176,7 +179,6 @@ module.exports = {
         "no-shadow-restricted-names": "error",
         "no-spaced-func": "error",
         "no-sync": "error",
-        "no-tabs": "error",
         "no-template-curly-in-string": "error",
         "no-ternary": "off",
         "no-throw-literal": "error",
@@ -222,7 +224,6 @@ module.exports = {
         "prefer-const": "off",
         "prefer-numeric-literals": "error",
         "prefer-promise-reject-errors": "error",
-        "prefer-reflect": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "prefer-template": "off",
