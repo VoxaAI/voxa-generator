@@ -6,10 +6,18 @@ const views = require('./views');
 const variables = require('./variables');
 const states = require('./states');
 
+/**
+ * Initial configuration
+ * see more: http://voxa.readthedocs.io/en/latest/index.html#initial-configuration
+ */
 const skill = new Voxa({ variables, views });
 states.register(skill);
 
-/*******  plugins  *******/
-/*****  plugins end *****/
+/**
+ * Apply plugins to your Voxa instance
+ * See more: http://voxa.readthedocs.io/en/latest/plugins.html
+ */
+
+// Voxa.plugins.replaceIntent(skill);
 
 module.exports = skill;
