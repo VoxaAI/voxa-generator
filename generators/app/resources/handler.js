@@ -215,6 +215,10 @@
         this.destinationPath('speechAssets')
       );
       this.fs.copy(
+        this.templatePath('speechAssets/customSlotTypes/.gitkeep'),
+        this.destinationPath('speechAssets/customSlotTypes/.gitkeep')
+      );
+      this.fs.copy(
         this.templatePath('test'),
         this.destinationPath('test')
       );
