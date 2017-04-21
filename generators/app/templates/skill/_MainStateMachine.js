@@ -18,6 +18,7 @@ states.register(skill);
  * See more: http://voxa.readthedocs.io/en/latest/plugins.html
  */
 
-// Voxa.plugins.replaceIntent(skill);
+ /*******  plugins  *******/
+ /*****  plugins end *****/
 
 module.exports = skill;

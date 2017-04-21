@@ -8,6 +8,11 @@ let initialPrompt = [
     default : ''// Default to current folder name
   }, {
     type    : 'input',
+    name    : 'description',
+    message : 'Please enter a description for your project',
+    default : '' // If description is empty not include description
+  }, {
+    type    : 'input',
     name    : 'author',
     message : 'Please enter your name/company?',
     default: 'Author'

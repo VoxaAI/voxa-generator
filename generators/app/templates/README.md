@@ -1,5 +1,7 @@
 # <%= name %>
 
+<%= description %>
+
 ### Development Setup
 
 * Install and use Node v4.3.2
