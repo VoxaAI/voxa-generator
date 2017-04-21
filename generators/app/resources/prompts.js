@@ -49,4 +49,13 @@ let pluginsPrompt = [
   }
 ];
 
-module.exports = { initialPrompt, secondPrompt, pluginsPrompt };
+let installPrompt = [
+  {
+    type: 'confirm',
+    name: 'dependencies',
+    message: 'Would you like to install the project dependencies?',
+    default: true
+  }
+];
+
+module.exports = { initialPrompt, secondPrompt, pluginsPrompt, installPrompt };

@@ -4,6 +4,7 @@
     initialPrompt = questions.initialPrompt,
     secondPrompt = questions.secondPrompt,
     pluginsPrompt = questions.pluginsPrompt,
+    installPrompt = questions.installPrompt,
     _plugins = require('./plugins');
 
   module.exports = class PromptHandler {
@@ -23,6 +24,14 @@
               });
         }
         return answers;
+    }
+
+    thirdPrompt(answers){
+      return this.prompt(installPrompt)
+      .then((res) => {
+        _.set(answers,'dependencies', res);
+        return answers;
+      });
     }
 
 
@@ -128,82 +137,86 @@
 
     }
 
+    setNewDestinationRoot(newRoute){
+      this.destinationRoot(newRoute);
+    }
+
     creatingConfigFiles(){
       this.fs.copy(
         this.templatePath('.editorconfig'),
-        this.destinationPath(this.props.dir + '.editorconfig')
+        this.destinationPath('.editorconfig')
       );
       this.fs.copy(
         this.templatePath('.eslintrc.json'),
-        this.destinationPath(this.props.dir + '.eslintrc.json')
+        this.destinationPath('.eslintrc.json')
       );
       this.fs.copy(
         this.templatePath('_gitignore'),
-        this.destinationPath(this.props.dir + '.gitignore')
+        this.destinationPath('.gitignore')
       );
       this.fs.copy(
         this.templatePath('.nvmrc'),
-        this.destinationPath(this.props.dir + '.nvmrc')
+        this.destinationPath('.nvmrc')
       );
       this.fs.copyTpl(
         this.templatePath('package.json'),
-        this.destinationPath(this.props.dir + 'package.json'), {
+        this.destinationPath('package.json'), {
           name: this.props.name,
           author: this.props.author
         }
       );
       this.fs.copy(
         this.templatePath('gulpfile.js'),
-        this.destinationPath(this.props.dir + 'gulpfile.js')
+        this.destinationPath('gulpfile.js')
       );
       this.fs.copyTpl(
         this.templatePath('README.md'),
-        this.destinationPath(this.props.dir + 'README.md'), {
+        this.destinationPath('README.md'), {
           name: this.props.name
         }
       );
       this.fs.copy(
         this.templatePath('server.js'),
-        this.destinationPath(this.props.dir + 'server.js')
+        this.destinationPath('server.js')
       );
       this.fs.copy(
         this.templatePath('serverless.yml'),
-        this.destinationPath(this.props.dir + 'serverless.yml')
+        this.destinationPath('serverless.yml')
       );
     }
 
     creatingAppFiles(){
       this.fs.copy(
         this.templatePath('config'),
-        this.destinationPath(this.props.dir + 'config')
+        this.destinationPath('config')
       );
 
       if(this.props.services){
         _.forEach(this.props.services, (item) =>{
           this.fs.copy(
             this.templatePath(item),
-            this.destinationPath(this.props.dir + item)
+            this.destinationPath(item)
           );
         });
       }
       else{
         this.fs.copy(
           this.templatePath('services/.gitkeep'),
-          this.destinationPath(this.props.dir + 'services/.gitkeep')
+          this.destinationPath('services/.gitkeep')
         );  
       }
 
       this.fs.copy(
         this.templatePath('skill'),
-        this.destinationPath(this.props.dir + 'skill')
+        this.destinationPath('skill')
       );
       this.fs.copy(
         this.templatePath('speechAssets'),
-        this.destinationPath(this.props.dir + 'speechAssets')
+        this.destinationPath('speechAssets')
       );
       this.fs.copy(
         this.templatePath('test'),
-        this.destinationPath(this.props.dir + 'test')
+        this.destinationPath('test')
       );
     }
 
@@ -213,19 +226,19 @@
 
       //app files
       this.fs.delete(this.templatePath('skill/MainStateMachine.js'));
-      this.fs.delete(this.destinationPath(this.props.dir + 'skill/_MainStateMachine.js'));
+      this.fs.delete(this.destinationPath('skill/_MainStateMachine.js'));
 
       this.fs.delete(this.templatePath('config/local.json'));
-      this.fs.delete(this.destinationPath(this.props.dir + 'config/local.json.example'));
+      this.fs.delete(this.destinationPath('config/local.json.example'));
 
       this.fs.delete(this.templatePath('config/production.json'));
-      this.fs.delete(this.destinationPath(this.props.dir + 'config/production.json.example'));
+      this.fs.delete(this.destinationPath('config/production.json.example'));
 
       this.fs.delete(this.templatePath('config/staging.json'));
-      this.fs.delete(this.destinationPath(this.props.dir + 'config/staging.json.example'));
+      this.fs.delete(this.destinationPath('config/staging.json.example'));
 
       this.fs.delete(this.templatePath('config/index.js'));
-      this.fs.delete(this.destinationPath(this.props.dir + 'config/_index.js'));
+      this.fs.delete(this.destinationPath('config/_index.js'));
     }
 
   };

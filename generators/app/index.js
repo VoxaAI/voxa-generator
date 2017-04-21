@@ -12,7 +12,9 @@ module.exports = Generator.extend({
     return handler.initialPrompt.call(this)
     .then(answers => handler.secondPrompt.call(this, answers))
     .then(answers => handler.setPlugins.call(this, answers))
-    .then(answers => handler.finishPrompts.call(this,answers));
+    .then(answers => handler.thirdPrompt.call(this, answers))
+    .then(answers => handler.finishPrompts.call(this,answers))
+    .then(answers => handler.setNewDestinationRoot.call(this,answers.dir));
   },
 
   // Writing Logic here
@@ -30,7 +32,9 @@ module.exports = Generator.extend({
 
     // Install Dependencies if wanted
     install: function () {
-      //this.installDependencies();
+      if(this.props.dependencies){
+        this.installDependencies();  
+      }
     }
   }
 });
