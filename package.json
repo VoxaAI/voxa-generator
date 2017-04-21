@@ -32,12 +32,14 @@
     "eslint-plugin-import": "^2.2.0",
     "mocha": "*",
     "yeoman-assert": "^3.0.0",
-    "yeoman-test": "^1.6.0"
+    "yeoman-test": "^1.6.0",
+    "istanbul": "^0.4.5"
   },
   "repository": "mediarain/generator-alexa-skill",
   "scripts": {
-    "test": "mocha test/app.js",
-    "eslint": "node_modules/.bin/eslint generators test"
+    "test": "istanbul cover _mocha -- --recursive test",
+    "eslint": "node_modules/.bin/eslint generators/ test/",
+    "cobertura": "istanbul report cobertura --root coverage"
   },
   "license": "MIT"
 }

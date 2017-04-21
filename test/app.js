@@ -1,5 +1,5 @@
 'use strict';
-const Generator = require('../generators/app/index'),
+const //Generator = require('../generators/app/index'),
 	helpers = require('yeoman-test'),
 	assert = require('yeoman-assert'),
 	path = require('path'),
@@ -9,6 +9,8 @@ const Generator = require('../generators/app/index'),
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
+const Generator = require('../generators/app/index.js');
+
 describe('Generator', () => {
 	it('Should work', () => {
 		let res = helpers.run(path.join(__dirname, '../generators/app'))
@@ -16,6 +18,7 @@ describe('Generator', () => {
 				    .withArguments(['arg'])      // Mock the arguments
 				    .withPrompts({ name: 'name', author: 'author', subDirConfim: false }); // Mock the prompt answers
 
+		//console.log(res, 'res');
 		let answers = res.answers;
 		expect(answers.name).to.equal('name');
 		expect(answers.author).to.equal('author');

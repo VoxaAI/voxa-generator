@@ -1,7 +1,7 @@
 'use strict';
 
 const Generator = require('yeoman-generator'),
-PromptHandler = require('./resources/PromptHandler'),
+PromptHandler = require('./resources/handler'),
 handler = new PromptHandler();
 
 module.exports = Generator.extend({
