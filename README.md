@@ -31,3 +31,10 @@ Your directory structure should look like this:
 	`serverless.yml` -> Serverless configuration
 	`package.json` -> Dependencies
 	`README.md`
+
+### Resources
+
+  * [Documentation](http://voxa.readthedocs.io/en/latest/)
+  * [Bug Tracker](https://github.com/mediarain/voxa/issues)
+  * [Mail List](https://groups.google.com/d/forum/voxa-framework)
+  * [IRC](irc://chat.freenode.net/voxa) (chat.freenode.net, #voxa)
