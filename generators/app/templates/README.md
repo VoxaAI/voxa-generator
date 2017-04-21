@@ -55,6 +55,12 @@ Don't have a real device to test?. We got you cover try one of this simulators
   * [Reverb.ai](https://reverb.ai/) - Available on macOS, iOS, Android and Web
   * [Echosim.io](https://echosim.io/) - Available on Web
 
+### Debugging
+
+Voxa uses the debug module internally to log a number of different internal events, if you want have a look at those events you have to declare the following environment variable
+
+`DEBUG=voxa`
+
 ### Directory Structure
 
 	`config/` -> Environment variables or configuration
