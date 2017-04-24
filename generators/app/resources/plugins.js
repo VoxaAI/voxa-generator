@@ -49,6 +49,7 @@ AWS.config.update(_.merge({
       }
     ],
     usage: `const UserStorage = require('../services/userStorage');
+
 const adapter = new UserStorage();
 Voxa.plugins.autoLoad(skill, { adapter });`
   },
@@ -71,11 +72,12 @@ Voxa.plugins.autoLoad(skill, { adapter });`
         }
       }
     ],
-    usage: `const AWS = require("aws-sdk");
+    usage: `const AWS = require('aws-sdk');
+
 const cloudWatch = new AWS.CloudWatch({});
 const eventMetric = {
   MetricName: 'Caught Error', // Name of your metric
-  Namespace: 'SkillName' // Name of your skill
+  Namespace: 'SkillName', // Name of your skill
 };
 
 Voxa.plugins.cloudWatch(skill, cloudWatch, eventMetric);`

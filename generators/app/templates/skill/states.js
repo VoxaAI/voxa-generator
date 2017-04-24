@@ -1,31 +1,45 @@
 'use strict';
 
-const Reply = require('voxa').Reply;
+/*
+* States are the controller part of the Voxa's mvc model
+* more info at http://voxa.readthedocs.io/en/latest/controllers.html
+*/
 
 exports.register = function register(skill) {
-  // This event is triggered after new session has started
-  skill.onSessionStarted((alexaEvent) => {});
-  // This event is triggered before the current session has ended
-  skill.onSessionEnded((alexaEvent) => {});
-  // This can be used to plug new information in the request
-  skill.onRequestStated((alexaEvent) => {});
+  /**
+   * If you want to handle a specific state onIntent
+   * see more http://voxa.readthedocs.io/en/latest/controllers.html#the-onintent-helper
+   * See more handlers at http://voxa.readthedocs.io/en/latest/statemachine-skill.html
+   */
 
-  // This handler will catch all errors generated when trying to make transitions in the stateMachine, this could include errors in the state machine controllers
-  skill.onStateMachineError((alexaEvent, reply, error) =>
-    // it gets the current reply, which could be incomplete due to an error.
-    new Reply(alexaEvent, { tell: 'An error in the controllers code' }).write(),
-  );
+  skill.onIntent('LaunchIntent', () => ({ reply: 'Intent.Launch', to: 'Overview' }));
 
-  // This is the more general handler and will catch all unhandled errors in the framework
-  skill.onError((alexaEvent, error) =>
-    new Reply(alexaEvent, { tell: 'An unrecoverable error occurred.' }).write(),
-  );
+  // See how to manage the transition
+  // http://voxa.readthedocs.io/en/latest/transition.html
+  skill.onIntent('AMAZON.HelpIntent', () => ({ reply: 'Intent.Help', to: 'exit' }));
 
-  // This event is triggered before every time the user response to an Alexa event...
-  // and it have two parameters, alexaEvent and the reply controller.
-  skill.onBeforeReplySent((alexaEvent, reply) => { });
-  // Launch intent example
-  skill.onIntent('LaunchIntent', () => ({ reply: 'Intent.Launch', to: 'entry' }));
-  // AMAMAZON Build-in Help Intent example
-  skill.onIntent('AMAZON.HelpIntent', () => ({ reply: 'Intent.Help', to: 'die' }));
+
+  skill.onState('exit', () => ({ reply: 'Intent.Exit', to: 'die' }));
+
+  skill.onState('Overview', (alexaEvent) => {
+    // Read more about alexaEvent at http://voxa.readthedocs.io/en/latest/alexa-event.html#AlexaEvent
+    if (alexaEvent.intent.name === 'AMAZON.YesIntent') {
+      return ({ to: 'AMAZON.HelpIntent' });
+    }
+
+    if (alexaEvent.intent.name === 'AMAZON.NoIntent') {
+      return ({ to: 'exit' });
+    }
+
+    return ({ to: 'entry' });
+  });
+
+  /**
+   * Error handlers
+   * See more: http://voxa.readthedocs.io/en/latest/statemachine-skill.html#error-handlers
+   */
+
+  skill.onError(() => ({ reply: 'Error.General' }));
+  skill.onStateMachineError(() => ({ reply: 'Error.General' }));
+  skill.onUnhandledState(() => ({ reply: 'Error.General' }));
 };

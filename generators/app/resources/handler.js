@@ -1,3 +1,4 @@
+'use strict';
   const _ = require('lodash');
   let
     questions = require('./prompts'),
@@ -63,7 +64,7 @@
       envFile = JSON.parse(this.fs.read(envPath)),
 
       filerBuffer   = this.fs.read(path),
-      hook  = '/*******  plugins  *******/',
+      hook  = '/**  plugins  **/',
       newBuffer = '',
       configBuffer = '',
 
@@ -75,7 +76,7 @@
       if(_.keys(answers).length > 0){
         _.forIn(plugins, (val, key) =>{
           if(val){
-            let i = _.findIndex(_plugins,{name: key} ), 
+            let i = _.findIndex(_plugins,{name: key} ),
             usage = _plugins[i].usage,
             dependencies = _plugins[i].dependencies,
             files = _plugins[i].files,
@@ -83,12 +84,12 @@
             config = _plugins[i].config;
 
             if(config){
-              configBuffer += config + '\n\n';
+              configBuffer += config + '\n';
             }
 
             if(dependencies){
               _.forEach(dependencies, function(item){
-                _.set(jsonFile,`dependencies.${item.name}`,item.version); 
+                _.set(jsonFile,`dependencies.${item.name}`,item.version);
               });
             }
 
@@ -101,13 +102,13 @@
             if(env){
               _.forEach(env, (item) =>{
                 _.mapKeys(item, (value, key) => {
-                  _.set(envFile, key, value);  
+                  _.set(envFile, key, value);
                 });
               });
             }
 
             //inserting usage
-            newBuffer += usage + '\n\n';
+            newBuffer += usage + '\n';
           }
         });
 
@@ -124,10 +125,10 @@
       }
 
       if(arrFiles.length > 0){
-      _.set(answers,'services', arrFiles);  
+      _.set(answers,'services', arrFiles);
       }
 
-      _.set(answers,'env', envFile);  
+      _.set(answers,'env', envFile);
       this.fs.write(envNewPath, JSON.stringify(envFile, null, '\t'));
       this.fs.write(stagNewPath, JSON.stringify(envFile, null, '\t'));
       this.fs.write(prodNewPath, JSON.stringify(envFile, null, '\t'));
@@ -162,6 +163,7 @@
         this.templatePath('package.json'),
         this.destinationPath('package.json'), {
           name: this.props.name,
+          description: this.props.description,
           author: this.props.author
         }
       );
@@ -172,7 +174,8 @@
       this.fs.copyTpl(
         this.templatePath('README.md'),
         this.destinationPath('README.md'), {
-          name: this.props.name
+          name: this.props.name,
+          description: this.props.description
         }
       );
       this.fs.copy(
@@ -203,7 +206,7 @@
         this.fs.copy(
           this.templatePath('services/.gitkeep'),
           this.destinationPath('services/.gitkeep')
-        );  
+        );
       }
 
       this.fs.copy(
