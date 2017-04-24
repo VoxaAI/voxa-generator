@@ -16,7 +16,7 @@ const views = (function views() {
         card: {
           type: 'Simple',
           title: 'Congratulations, Your skill is alive!',
-          content: 'Make sure to check Voxa\'s documentation at voxa.read the docs.io',
+          content: 'Make sure to check Voxa\'s documentation at voxa.readthedocs.io',
         },
       },
       Help: {
