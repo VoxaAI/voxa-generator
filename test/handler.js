@@ -19,27 +19,15 @@ describe('Generator Handler', () => {
 		});
 	});
 
-	it('secondPrompt function', () => {
+	it('secondPrompt function');
 
-	});
+	it('setPlugins function');
 
-	it('setPlugins function', () => {
+	it('finishPrompts function');
 
-	});
+	it('creatingConfigFiles function');
 
-	it('finishPrompts function', () => {
+	it('creatingAppFiles function');
 
-	});
-
-	it('creatingConfigFiles function', () => {
-
-	});
-
-	it('creatingAppFiles function', () => {
-
-	});
-
-	it('removingUnnecessaryFiles function', () => {
-
-	});
+	it('removingUnnecessaryFiles function');
 });

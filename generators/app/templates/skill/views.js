@@ -12,10 +12,10 @@ const views = (function views() {
       // See more: http://voxa.readthedocs.io/en/latest/reply.html
       Launch: {
         ask: '{helloWorld}. Time to take you on! Is there anything else i can help you with?',
-        reprompt: 'If you say yes i can tell you where to find documentation. ',
+        reprompt: 'If you say yes i can tell you where to find the documentation. ',
         card: {
           type: 'Simple',
-          title: 'Congratulation, Your skill is alive!',
+          title: 'Congratulations, Your skill is alive!',
           content: 'Make sure to check Voxa\'s documentation at voxa.readthedocs.io',
         },
       },
