@@ -6,6 +6,23 @@
 */
 
 exports.register = function register(skill) {
+  /*
+  * This event is triggered after new session has started
+  * see more http://voxa.readthedocs.io/en/latest/statemachine-skill.html#Voxa.onRequestStarted
+  */
+  skill.onSessionStarted((alexaEvent) => {});
+  /*
+  * This event is triggered before the current session has ended
+  * see more http://voxa.readthedocs.io/en/latest/statemachine-skill.html#Voxa.onSessionEnded
+  */
+  skill.onSessionEnded((alexaEvent) => {});
+  /*
+  * This can be used to plug new information in the request
+  * see more http://voxa.readthedocs.io/en/latest/statemachine-skill.html#Voxa.onRequestStarted
+  */
+  skill.onRequestStarted((alexaEvent) => {});
+
+
   /**
    * If you want to handle a specific state onIntent
    * see more http://voxa.readthedocs.io/en/latest/controllers.html#the-onintent-helper
