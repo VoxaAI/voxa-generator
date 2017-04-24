@@ -6,11 +6,20 @@
 */
 
 exports.register = function register(skill) {
-  // This event is triggered after new session has started
+  /*
+  * This event is triggered after new session has started
+  * see more http://voxa.readthedocs.io/en/latest/statemachine-skill.html#Voxa.onRequestStarted
+  */
   skill.onSessionStarted((alexaEvent) => {});
-  // This event is triggered before the current session has ended
+  /*
+  * This event is triggered before the current session has ended
+  * see more http://voxa.readthedocs.io/en/latest/statemachine-skill.html#Voxa.onSessionEnded
+  */
   skill.onSessionEnded((alexaEvent) => {});
-  // This can be used to plug new information in the request
+  /*
+  * This can be used to plug new information in the request
+  * see more http://voxa.readthedocs.io/en/latest/statemachine-skill.html#Voxa.onRequestStarted
+  */
   skill.onRequestStarted((alexaEvent) => {});
 
 
