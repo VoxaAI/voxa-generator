@@ -10,7 +10,6 @@ function getEnv() {
   // TODO put your own lambda function name here
 
   const AWS_LAMBDA_PRODUCTION_ENV = ['LAMBDA_FUNCTION_NAME_PROD']; // production
-  const AWS_LAMBDA_STAGING_ENV = ['LAMBDA_FUNCTION_NAME_STAGE'];  // staging
 
   if (NODE_ENV) {
     return NODE_ENV;
@@ -18,7 +17,8 @@ function getEnv() {
 
   if (AWS_LAMBDA_FUNCTION_NAME) {
     if (_.includes(AWS_LAMBDA_PRODUCTION_ENV, AWS_LAMBDA_FUNCTION_NAME)) return 'production';
-    if (_.includes(AWS_LAMBDA_STAGING_ENV, AWS_LAMBDA_FUNCTION_NAME)) return 'staging';
+
+    return 'staging';
   }
 
   // Default local

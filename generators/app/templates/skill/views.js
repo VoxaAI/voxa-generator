@@ -11,10 +11,27 @@ const views = (function views() {
       // Use ask, tell, say, reprompt, card for your reply
       // See more: http://voxa.readthedocs.io/en/latest/reply.html
       Launch: {
-        tell: 'Welcome!',
+        ask: 'Hello World. Time to take you on! Is there anything else i can help you with?',
+        reprompt: 'If you say yes i can tell you where to find documentation. ',
+        card: {
+          type: 'Simple',
+          title: 'Congratulation, Your skill is alive!',
+          content: 'Make sure to check Voxa\'s documentation at voxa.readthedocs.io',
+        },
       },
       Help: {
-        say: 'Some help text here.',
+        say: 'For Further details make sure to check Voxa Documentation at voxa.readthedocs.io',
+      },
+      Exit: {
+        tell: '<say-as interpret-as="interjection">au revoir.</say-as>',
+      },
+    },
+    Error: {
+      General: {
+        tell: '<say-as interpret-as="interjection">d’oh.</say-as>Something went wrong',
+      },
+      UnhandleState: {
+        tell: '<say-as interpret-as="interjection">aw man.</say-as>I\'m not sure what to do',
       },
     },
   };

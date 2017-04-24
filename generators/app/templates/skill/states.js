@@ -12,9 +12,34 @@ exports.register = function register(skill) {
    * See more handlers at http://voxa.readthedocs.io/en/latest/statemachine-skill.html
    */
 
-  skill.onIntent('LaunchIntent', () => ({ reply: 'Intent.Launch', to: 'entry' }));
+  skill.onIntent('LaunchIntent', () => ({ reply: 'Intent.Launch', to: 'Overview' }));
 
   // See how to manage the transition
   // http://voxa.readthedocs.io/en/latest/transition.html
-  skill.onIntent('AMAZON.HelpIntent', () => ({ reply: 'Intent.Help', to: 'die' }));
+  skill.onIntent('AMAZON.HelpIntent', () => ({ reply: 'Intent.Help', to: 'exit' }));
+
+
+  skill.onState('exit', () => ({ reply: 'Intent.Exit', to: 'die' }));
+
+  skill.onState('Overview', (alexaEvent) => {
+    // Read more about alexaEvent at http://voxa.readthedocs.io/en/latest/alexa-event.html#AlexaEvent
+    if (alexaEvent.intent.name === 'AMAZON.YesIntent') {
+      return ({ to: 'AMAZON.HelpIntent' });
+    }
+
+    if (alexaEvent.intent.name === 'AMAZON.NoIntent') {
+      return ({ to: 'exit' });
+    }
+
+    return ({ to: 'entry' });
+  });
+
+  /**
+   * Error handlers
+   * See more: http://voxa.readthedocs.io/en/latest/statemachine-skill.html#error-handlers
+   */
+
+  skill.onError(() => ({ reply: 'Error.General' }));
+  skill.onStateMachineError(() => ({ reply: 'Error.General' }));
+  skill.onUnhandledState(() => ({ reply: 'Error.General' }));
 };
