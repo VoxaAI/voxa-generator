@@ -64,7 +64,7 @@
       envFile = JSON.parse(this.fs.read(envPath)),
 
       filerBuffer   = this.fs.read(path),
-      hook  = '/*******  plugins  *******/',
+      hook  = '/**  plugins  **/',
       newBuffer = '',
       configBuffer = '',
 
@@ -84,7 +84,7 @@
             config = _plugins[i].config;
 
             if(config){
-              configBuffer += config + '\n\n';
+              configBuffer += config + '\n';
             }
 
             if(dependencies){
@@ -108,7 +108,7 @@
             }
 
             //inserting usage
-            newBuffer += usage + '\n\n';
+            newBuffer += usage + '\n';
           }
         });
 

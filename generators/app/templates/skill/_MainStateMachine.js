@@ -18,7 +18,7 @@ states.register(skill);
  * See more: http://voxa.readthedocs.io/en/latest/plugins.html
  */
 
- /*******  plugins  *******/
- /*****  plugins end *****/
+ /**  plugins  **/
+ /**  plugins end **/
 
 module.exports = skill;
