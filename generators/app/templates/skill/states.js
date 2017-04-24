@@ -11,7 +11,7 @@ exports.register = function register(skill) {
   // This event is triggered before the current session has ended
   skill.onSessionEnded((alexaEvent) => {});
   // This can be used to plug new information in the request
-  skill.onRequestStated((alexaEvent) => {});
+  skill.onRequestStarted((alexaEvent) => {});
 
 
   /**
