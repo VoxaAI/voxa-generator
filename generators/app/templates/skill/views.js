@@ -16,11 +16,11 @@ const views = (function views() {
         card: {
           type: 'Simple',
           title: 'Congratulations, Your skill is alive!',
-          content: 'Make sure to check Voxa\'s documentation at voxa.readthedocs.io',
+          content: 'Make sure to check Voxa\'s documentation at voxa.read the docs.io',
         },
       },
       Help: {
-        say: 'For Further details make sure to check Voxa Documentation at voxa.readthedocs.io',
+        say: 'For Further details make sure to check the Voxa documentation at voxa.read the docs.io',
       },
       Exit: {
         tell: '<say-as interpret-as="interjection">au revoir.</say-as>',
