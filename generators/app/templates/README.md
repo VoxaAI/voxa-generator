@@ -4,7 +4,7 @@
 
 ### Development Setup
 
-* Install and use Node v4.3.2
+* Install and use Node v6.10
 * Run `npm install`
 * Edit `config/local.json` with all of the requisite fields.
 

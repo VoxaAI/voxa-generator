@@ -11,7 +11,7 @@ const views = (function views() {
       // Use ask, tell, say, reprompt, card for your reply
       // See more: http://voxa.readthedocs.io/en/latest/reply.html
       Launch: {
-        ask: 'Hello World. Time to take you on! Is there anything else i can help you with?',
+        ask: '{helloWorld}. Time to take you on! Is there anything else i can help you with?',
         reprompt: 'If you say yes i can tell you where to find documentation. ',
         card: {
           type: 'Simple',
