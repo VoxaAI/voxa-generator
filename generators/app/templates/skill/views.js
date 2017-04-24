@@ -20,7 +20,7 @@ const views = (function views() {
         },
       },
       Help: {
-        say: 'For Further details make sure to check Voxa Documentation at voxa.readthedocs.io',
+        say: 'For Further details make sure to check the Voxa documentation at voxa.read the docs.io',
       },
       Exit: {
         tell: '<say-as interpret-as="interjection">au revoir.</say-as>',
