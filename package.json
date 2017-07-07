@@ -12,9 +12,6 @@
     "email": "npm@rain.agency",
     "url": ""
   },
-  "engines": {
-    "node": "7.7.4"
-  },
   "files": [
     "generators"
   ],
