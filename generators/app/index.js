@@ -20,7 +20,7 @@ module.exports = Generator.extend({
   // Writing Logic here
   writing: {
     // Copy the configuration files
-    config: function () { 
+    config: function () {
       handler.creatingConfigFiles.call(this);
     },
 
@@ -33,7 +33,7 @@ module.exports = Generator.extend({
     // Install Dependencies if wanted
     install: function () {
       if(this.props.dependencies){
-        this.installDependencies();  
+        this.yarnInstall();
       }
     }
   }

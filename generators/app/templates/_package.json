@@ -17,8 +17,8 @@
     "echo","amazon"
   ],
   "license":"ISC",
-    "dependencies":{
-    "voxa":"^2.0.0",
+  "dependencies":{
+    "voxa":"^2.1.4",
     "bluebird":"^3.3.5",
     "lodash":"^4.17.4"
   },

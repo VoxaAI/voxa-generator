@@ -7,6 +7,9 @@
     "eslint": "node_modules/.bin/eslint generators/ test/",
     "cobertura": "istanbul report cobertura --root coverage"
   },
+  "engines": {
+    "node": "7.7.4"
+  },
   "author": {
     "name": "Rain Agency",
     "email": "npm@rain.agency",
@@ -45,6 +48,6 @@
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.6.0"
   },
-  "repository": "mediarain/generator-alexa-skill",
+  "repository": "mediarain/generator-voxa-skill",
   "license": "MIT"
 }
