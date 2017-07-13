@@ -7,9 +7,6 @@
     "eslint": "node_modules/.bin/eslint generators/ test/",
     "cobertura": "istanbul report cobertura --root coverage"
   },
-  "engines": {
-    "node": "7.7.4"
-  },
   "author": {
     "name": "Rain Agency",
     "email": "npm@rain.agency",
