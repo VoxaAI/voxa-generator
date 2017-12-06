@@ -10,6 +10,9 @@ describe('Skill', () => {
         application: {
           applicationId: '',
         },
+        user: {
+          userId: '',
+        },
       },
       request: {
         type: 'LaunchRequest',
