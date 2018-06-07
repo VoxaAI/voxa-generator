@@ -2,13 +2,15 @@
   "name": "generator-voxa-skill",
   "version": "0.1.0",
   "description": "Voxa skill template generator",
+  "scripts": {
+    "test": "istanbul cover _mocha -- --recursive test",
+    "eslint": "node_modules/.bin/eslint generators/ test/",
+    "cobertura": "istanbul report cobertura --root coverage"
+  },
   "author": {
     "name": "Rain Agency",
     "email": "npm@rain.agency",
     "url": ""
-  },
-  "engines": {
-    "node": "7.7.4"
   },
   "files": [
     "generators"
@@ -30,16 +32,19 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-plugin-import": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-eslint": "^3.0.1",
+    "gulp-exclude-gitignore": "^1.1.1",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^4.3.0",
+    "gulp-nsp": "^2.4.2",
+    "gulp-plumber": "^1.1.0",
+    "istanbul": "^0.4.5",
     "mocha": "*",
     "yeoman-assert": "^3.0.0",
-    "yeoman-test": "^1.6.0",
-    "istanbul": "^0.4.5"
+    "yeoman-test": "^1.6.0"
   },
   "repository": "mediarain/generator-alexa-skill",
-  "scripts": {
-    "test": "istanbul cover _mocha -- --recursive test",
-    "eslint": "node_modules/.bin/eslint generators/ test/",
-    "cobertura": "istanbul report cobertura --root coverage"
-  },
   "license": "MIT"
 }
