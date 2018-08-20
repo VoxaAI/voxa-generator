@@ -45,6 +45,6 @@
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.6.0"
   },
-  "repository": "mediarain/generator-alexa-skill",
+  "repository": "mediarain/generator-voxa-skill",
   "license": "MIT"
 }

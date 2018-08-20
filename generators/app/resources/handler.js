@@ -162,7 +162,7 @@
       this.fs.copyTpl(
         this.templatePath('package.json'),
         this.destinationPath('package.json'), {
-          name: this.props.name,
+          name: _.kebabCase(this.props.name),
           description: this.props.description,
           author: this.props.author
         }
