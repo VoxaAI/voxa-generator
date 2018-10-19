@@ -1,6 +1,6 @@
 'use strict';
 
-let initialPrompt = [
+const initialPrompt = [
   {
     type    : 'input',
     name    : 'name',

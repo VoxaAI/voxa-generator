@@ -9,12 +9,12 @@
 
   module.exports = class PromptHandler {
 
-    initialPrompt(){
+    initialPrompt() {
       _.set(initialPrompt[0],'default', this.appname);
       return this.prompt(initialPrompt);
     }
 
-    secondPrompt(answers){
+    secondPrompt(answers) {
         _.set(secondPrompt[0],'default', answers.name);
         if(answers.subDirConfim){
             return this.prompt(secondPrompt)
@@ -26,7 +26,7 @@
         return answers;
     }
 
-    thirdPrompt(answers){
+    thirdPrompt(answers) {
       return this.prompt(installPrompt)
       .then((res) => {
         _.set(answers,'dependencies', res);
@@ -35,7 +35,7 @@
     }
 
 
-    setPlugins(answers){
+    setPlugins(answers) {
       return this.prompt(pluginsPrompt)
       .then((res) =>{
         _.set(answers,'plugins', res);
@@ -43,7 +43,8 @@
       });
     }
 
-    finishPrompts(answers){
+    finishPrompts(answers) {
+      console.log('answers', answers);
       let plugins = answers.plugins,
       path =  this.templatePath('skill/_MainStateMachine.js'),
       newPath =  this.templatePath('skill/MainStateMachine.js'),

@@ -3,27 +3,31 @@
   "version":"0.1.0",
   "description":"",
   "main":"gulpfile.js",
-  "scripts":{
+  "scripts": {
     "test":"mocha --recursive test/**/*.spec.js",
     "watch":"node node_modules/gulp/bin/gulp.js watch",
-    "lint":"eslint config/ gulpfile.js services/ skill/ speechAssets/ test/ server.js"
+    "lint":"eslint src/ gulpfile.js speech-assets/ test/ server.js"
   },
   "author":"<%= author %>",
-  "engines":{"node":">=4.3.2"},
+  "engines": {"node":">=8.10"},
   "keywords":[
     "alexa skill",
     "skills",
-    "node.js >=4.3.2",
-    "echo","amazon"
+    "google actions",
+    "dialogflow",
+    "google home",
+    "google",
+    "node.js >=8.10",
+    "echo",
+    "amazon"
   ],
   "license":"ISC",
-    "dependencies":{
-    "voxa":"^2.0.0",
+  "dependencies": {
     "bluebird":"^3.3.5",
-    "lodash":"^4.17.4"
+    "lodash":"^4.17.11",
+    "voxa":"^3.0.0-alpha32"
   },
-  "devDependencies":
-  {
+  "devDependencies": {
     "chai":"^3.5.0",
     "eslint":"^3.15.0",
     "eslint-config-airbnb-base":"^11.1.0",
@@ -32,7 +36,7 @@
     "gulp-nodemon":"^2.0.7",
     "mocha":"^3.2.0"
   },
-  "directories":{
+  "directories": {
     "test":"test"
   }
 }

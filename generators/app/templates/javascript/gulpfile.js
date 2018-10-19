@@ -6,7 +6,7 @@ const nodemon = require('gulp-nodemon');
 gulp.task('watch', () =>
   nodemon({
     script: 'server.js',
-    watch: ['config/*', 'services/*', 'skill/*', 'server.js'],
+    watch: ['src/*', 'server.js'],
     ext: 'json js',
     ignore: ['node_modules/**/*'],
   }));

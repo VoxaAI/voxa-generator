@@ -19,12 +19,12 @@ service: starter-kit
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs8.10
 
 
 functions:
   skill:
-    handler: skill/index.handler
+    handler: src/app/index.alexa
     events:
       - alexaSkill
     environment: 

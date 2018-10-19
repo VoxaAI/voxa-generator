@@ -1,14 +1,10 @@
 {
-  "name": "generator-voxa-skill",
-  "version": "0.1.0",
-  "description": "Voxa skill template generator",
-  "author": {
-    "name": "Rain Agency",
-    "email": "npm@rain.agency",
-    "url": ""
-  },
+  "name": "generator-voxa",
+  "version": "1.0.0-alpha1",
+  "description": "A Yeoman generator for a Voxa 3 application",
+  "author": "Rain Agency <npm@rain.agency> (http://rain.agency)",
   "engines": {
-    "node": "7.7.4"
+    "node": ">=8.10"
   },
   "files": [
     "generators"
@@ -16,7 +12,16 @@
   "main": "app/index.js",
   "keywords": [
     "yeoman-generator",
-    "alexa-skill"
+    "alexa",
+    "skills",
+    "amazon",
+    "actions",
+    "dialogflow",
+    "google",
+    "framework",
+    "voice",
+    "voxa",
+    "app"
   ],
   "dependencies": {
     "lodash": "^4.17.4",
@@ -35,7 +40,7 @@
     "yeoman-test": "^1.6.0",
     "istanbul": "^0.4.5"
   },
-  "repository": "mediarain/generator-alexa-skill",
+  "repository": "mediarain/voxa-generator",
   "scripts": {
     "test": "istanbul cover _mocha -- --recursive test",
     "eslint": "node_modules/.bin/eslint generators/ test/",
