@@ -29,7 +29,7 @@
     thirdPrompt(answers) {
       return this.prompt(installPrompt)
       .then((res) => {
-        _.set(answers,'dependencies', res);
+        _.set(answers,'install', res);
         return answers;
       });
     }
@@ -78,7 +78,7 @@
           if(val){
             let i = _.findIndex(_plugins,{name: key} ), 
             usage = _plugins[i].usage,
-            dependencies = _plugins[i].dependencies,
+            install = _plugins[i].install,
             files = _plugins[i].files,
             env = _plugins[i].env,
             config = _plugins[i].config;
@@ -87,9 +87,9 @@
               configBuffer += config + '\n\n';
             }
 
-            if(dependencies){
-              _.forEach(dependencies, function(item){
-                _.set(jsonFile,`dependencies.${item.name}`,item.version); 
+            if(install && install.dependencies){
+              _.forEach(install.dependencies, function(item){
+                _.set(jsonFile,`install.dependencies.${item.name}`,item.version); 
               });
             }
 
