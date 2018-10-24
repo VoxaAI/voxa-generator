@@ -44,33 +44,37 @@
     }
 
     finishPrompts(answers) {
-      console.log('answers', answers);
-      let plugins = answers.plugins,
-      path =  this.templatePath('skill/_MainStateMachine.js'),
-      newPath =  this.templatePath('skill/MainStateMachine.js'),
+      const { language } = answers.install;
+      this.language = language.toLowerCase();
 
-      configPath = this.templatePath('config/_index.js'),
-      configNewPath = this.templatePath('config/index.js'),
+      const plugins = answers.plugins,
+      path =  this.templatePath(`${this.language}/src/app/_main.js`),
+      newPath =  this.templatePath('src/app/main.js'),
+
+      configPath = this.templatePath(`${this.language}/src/config/_index.js`),
+      configNewPath = this.templatePath('src/config/index.js'),
       configFile = this.fs.read(configPath),
 
-      jsonPath = this.templatePath('_package.json'),
+      jsonPath = this.templatePath(`${this.language}/_package.json`),
       jsonNewPath = this.templatePath('package.json'),
       jsonFile = JSON.parse(this.fs.read(jsonPath)),
 
-      envPath = this.templatePath('config/local.json.example'),
-      envNewPath = this.templatePath('config/local.json'),
-      stagNewPath = this.templatePath('config/staging.json'),
-      prodNewPath = this.templatePath('config/production.json'),
+      envPath = this.templatePath('common/config/local.json.example'),
+      envNewPath = this.templatePath('src/config/local.json'),
+      stagNewPath = this.templatePath('src/config/staging.json'),
+      prodNewPath = this.templatePath('src/config/production.json'),
       envFile = JSON.parse(this.fs.read(envPath)),
 
       filerBuffer   = this.fs.read(path),
       hook  = '/*******  plugins  *******/',
-      newBuffer = '',
-      configBuffer = '',
 
       arrFiles = [],
 
       dir = answers.subDirConfim ? answers.subDir + '/' : '';
+
+      let newBuffer = '',
+        configBuffer = '';
+
       _.set(answers,'dir', dir);
 
       if(_.keys(answers).length > 0){
@@ -138,11 +142,12 @@
 
     }
 
-    setNewDestinationRoot(newRoute){
+    setNewDestinationRoot(newRoute) {
       this.destinationRoot(newRoute);
     }
 
-    creatingConfigFiles(){
+    creatingConfigFiles() {
+      console.log('language', this.language);
       this.fs.copy(
         this.templatePath('.editorconfig'),
         this.destinationPath('.editorconfig')
@@ -152,7 +157,7 @@
         this.destinationPath('.eslintrc.json')
       );
       this.fs.copy(
-        this.templatePath('_gitignore'),
+        this.templatePath('common/_gitignore'),
         this.destinationPath('.gitignore')
       );
       this.fs.copy(
@@ -186,7 +191,7 @@
       );
     }
 
-    creatingAppFiles(){
+    creatingAppFiles() {
       this.fs.copy(
         this.templatePath('config'),
         this.destinationPath('config')
