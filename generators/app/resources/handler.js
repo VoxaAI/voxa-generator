@@ -49,20 +49,20 @@
 
       const plugins = answers.plugins,
       path =  this.templatePath(`${this.language}/src/app/_main.js`),
-      newPath =  this.templatePath('src/app/main.js'),
+      newPath =  this.templatePath(`${this.language}/src/app/main.js`),
 
       configPath = this.templatePath(`${this.language}/src/config/_index.js`),
-      configNewPath = this.templatePath('src/config/index.js'),
+      configNewPath = this.templatePath(`${this.language}/src/config/index.js`),
       configFile = this.fs.read(configPath),
 
       jsonPath = this.templatePath(`${this.language}/_package.json`),
-      jsonNewPath = this.templatePath('package.json'),
+      jsonNewPath = this.templatePath(`${this.language}/package.json`),
       jsonFile = JSON.parse(this.fs.read(jsonPath)),
 
       envPath = this.templatePath(`common/config/local.json.example`),
-      envNewPath = this.templatePath(`src/config/local.json`),
-      stagNewPath = this.templatePath(`src/config/staging.json`),
-      prodNewPath = this.templatePath(`src/config/production.json`),
+      envNewPath = this.templatePath(`common/config/local.json`),
+      stagNewPath = this.templatePath(`common/config/staging.json`),
+      prodNewPath = this.templatePath(`common/config/production.json`),
       envFile = JSON.parse(this.fs.read(envPath)),
 
       filerBuffer   = this.fs.read(path),
@@ -164,7 +164,7 @@
         this.destinationPath('.nvmrc')
       );
       this.fs.copyTpl(
-        this.templatePath(`${this.language}/_package.json`),
+        this.templatePath(`${this.language}/package.json`),
         this.destinationPath('package.json'), {
           name: this.props.name,
           author: this.props.author
@@ -193,7 +193,17 @@
     creatingAppFiles() {
       this.fs.copy(
         this.templatePath('common/config'),
-        this.destinationPath('config')
+        this.destinationPath('src/config')
+      );
+
+      this.fs.copy(
+        this.templatePath(`${this.language}/src/config/index.js`),
+        this.destinationPath('src/config/index.js')
+      );
+
+      this.fs.copy(
+        this.templatePath(`${this.language}/src/config/env.js`),
+        this.destinationPath('src/config/env.js')
       );
 
       if(this.props.services) {
@@ -207,7 +217,7 @@
       else{
         this.fs.copy(
           this.templatePath(`${this.language}/src/services/.gitkeep`),
-          this.destinationPath('services/.gitkeep')
+          this.destinationPath('src/services/.gitkeep')
         );  
       }
 
@@ -227,23 +237,22 @@
 
     removingUnnecessaryFiles(){
       //config files
-      this.fs.delete(this.templatePath('package.json'));
+      this.fs.delete(this.templatePath(`${this.language}/package.json`));
 
       //app files
-      this.fs.delete(this.templatePath('skill/MainStateMachine.js'));
-      this.fs.delete(this.destinationPath('skill/_MainStateMachine.js'));
+      this.fs.delete(this.templatePath(`${this.language}/src/app/main.js`));
+      this.fs.delete(this.destinationPath(`src/app/_main.js`));
 
-      this.fs.delete(this.templatePath('config/local.json'));
-      this.fs.delete(this.destinationPath('config/local.json.example'));
+      this.fs.delete(this.templatePath(`common/config/local.json`));
+      this.fs.delete(this.destinationPath('src/config/local.json.example'));
 
-      this.fs.delete(this.templatePath('config/production.json'));
-      this.fs.delete(this.destinationPath('config/production.json.example'));
+      this.fs.delete(this.templatePath('common/config/production.json'));
+      this.fs.delete(this.destinationPath('src/config/production.json.example'));
 
-      this.fs.delete(this.templatePath('config/staging.json'));
-      this.fs.delete(this.destinationPath('config/staging.json.example'));
+      this.fs.delete(this.templatePath('common/config/staging.json'));
+      this.fs.delete(this.destinationPath('src/config/staging.json.example'));
 
-      this.fs.delete(this.templatePath('config/index.js'));
-      this.fs.delete(this.destinationPath('config/_index.js'));
+      this.fs.delete(this.templatePath(`${this.language}/src/config/index.js`));
     }
 
   };
