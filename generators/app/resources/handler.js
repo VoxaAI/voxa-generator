@@ -59,10 +59,10 @@
       jsonNewPath = this.templatePath('package.json'),
       jsonFile = JSON.parse(this.fs.read(jsonPath)),
 
-      envPath = this.templatePath('common/config/local.json.example'),
-      envNewPath = this.templatePath('src/config/local.json'),
-      stagNewPath = this.templatePath('src/config/staging.json'),
-      prodNewPath = this.templatePath('src/config/production.json'),
+      envPath = this.templatePath(`common/config/local.json.example`),
+      envNewPath = this.templatePath(`src/config/local.json`),
+      stagNewPath = this.templatePath(`src/config/staging.json`),
+      prodNewPath = this.templatePath(`src/config/production.json`),
       envFile = JSON.parse(this.fs.read(envPath)),
 
       filerBuffer   = this.fs.read(path),
@@ -147,13 +147,12 @@
     }
 
     creatingConfigFiles() {
-      console.log('language', this.language);
       this.fs.copy(
-        this.templatePath('.editorconfig'),
+        this.templatePath(`${this.language}/.editorconfig`),
         this.destinationPath('.editorconfig')
       );
       this.fs.copy(
-        this.templatePath('.eslintrc.json'),
+        this.templatePath(`${this.language}/.eslintrc.json`),
         this.destinationPath('.eslintrc.json')
       );
       this.fs.copy(
@@ -161,43 +160,43 @@
         this.destinationPath('.gitignore')
       );
       this.fs.copy(
-        this.templatePath('.nvmrc'),
+        this.templatePath(`${this.language}/.nvmrc`),
         this.destinationPath('.nvmrc')
       );
       this.fs.copyTpl(
-        this.templatePath('package.json'),
+        this.templatePath(`${this.language}/_package.json`),
         this.destinationPath('package.json'), {
           name: this.props.name,
           author: this.props.author
         }
       );
       this.fs.copy(
-        this.templatePath('gulpfile.js'),
+        this.templatePath(`${this.language}/gulpfile.js`),
         this.destinationPath('gulpfile.js')
       );
       this.fs.copyTpl(
-        this.templatePath('README.md'),
+        this.templatePath(`${this.language}/README.md`),
         this.destinationPath('README.md'), {
           name: this.props.name
         }
       );
       this.fs.copy(
-        this.templatePath('server.js'),
+        this.templatePath(`${this.language}/server.js`),
         this.destinationPath('server.js')
       );
       this.fs.copy(
-        this.templatePath('serverless.yml'),
+        this.templatePath(`${this.language}/serverless.yml`),
         this.destinationPath('serverless.yml')
       );
     }
 
     creatingAppFiles() {
       this.fs.copy(
-        this.templatePath('config'),
+        this.templatePath('common/config'),
         this.destinationPath('config')
       );
 
-      if(this.props.services){
+      if(this.props.services) {
         _.forEach(this.props.services, (item) =>{
           this.fs.copy(
             this.templatePath(item),
@@ -207,21 +206,21 @@
       }
       else{
         this.fs.copy(
-          this.templatePath('services/.gitkeep'),
+          this.templatePath(`${this.language}/src/services/.gitkeep`),
           this.destinationPath('services/.gitkeep')
         );  
       }
 
       this.fs.copy(
-        this.templatePath('skill'),
-        this.destinationPath('skill')
+        this.templatePath(`${this.language}/src/app/`),
+        this.destinationPath('src/app/')
       );
       this.fs.copy(
-        this.templatePath('speechAssets'),
-        this.destinationPath('speechAssets')
+        this.templatePath('common/speech-assets'),
+        this.destinationPath('speech-assets')
       );
       this.fs.copy(
-        this.templatePath('test'),
+        this.templatePath(`${this.language}/test`),
         this.destinationPath('test')
       );
     }
