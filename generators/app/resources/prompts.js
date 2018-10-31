@@ -1,6 +1,6 @@
 'use strict';
 
-let initialPrompt = [
+const initialPrompt = [
   {
     type    : 'input',
     name    : 'name',
@@ -10,7 +10,7 @@ let initialPrompt = [
     type    : 'input',
     name    : 'author',
     message : 'Please enter your name/company?',
-    default: 'Author'
+    default: 'Author <author@example.com> (http://example.com)'
   },{
     type    : 'confirm',
     name    : 'subDirConfim',
@@ -50,6 +50,13 @@ let pluginsPrompt = [
 ];
 
 let installPrompt = [
+  {
+    type: 'list',
+    name: 'language',
+    choices: [ 'JavaScript', 'TypeScript' ],
+    message: 'What language would you like to use to write Voxa app?',
+    default: 'JavaScript'
+  },
   {
     type: 'confirm',
     name: 'dependencies',

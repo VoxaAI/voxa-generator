@@ -9,12 +9,12 @@
 
   module.exports = class PromptHandler {
 
-    initialPrompt(){
+    initialPrompt() {
       _.set(initialPrompt[0],'default', this.appname);
       return this.prompt(initialPrompt);
     }
 
-    secondPrompt(answers){
+    secondPrompt(answers) {
         _.set(secondPrompt[0],'default', answers.name);
         if(answers.subDirConfim){
             return this.prompt(secondPrompt)
@@ -26,16 +26,16 @@
         return answers;
     }
 
-    thirdPrompt(answers){
+    thirdPrompt(answers) {
       return this.prompt(installPrompt)
       .then((res) => {
-        _.set(answers,'dependencies', res);
+        _.set(answers,'install', res);
         return answers;
       });
     }
 
 
-    setPlugins(answers){
+    setPlugins(answers) {
       return this.prompt(pluginsPrompt)
       .then((res) =>{
         _.set(answers,'plugins', res);
@@ -43,33 +43,38 @@
       });
     }
 
-    finishPrompts(answers){
-      let plugins = answers.plugins,
-      path =  this.templatePath('skill/_MainStateMachine.js'),
-      newPath =  this.templatePath('skill/MainStateMachine.js'),
+    finishPrompts(answers) {
+      const { language } = answers.install;
+      this.language = language.toLowerCase();
 
-      configPath = this.templatePath('config/_index.js'),
-      configNewPath = this.templatePath('config/index.js'),
+      const plugins = answers.plugins,
+      path =  this.templatePath(`${this.language}/src/app/_main.js`),
+      newPath =  this.templatePath(`${this.language}/src/app/main.js`),
+
+      configPath = this.templatePath(`${this.language}/src/config/_index.js`),
+      configNewPath = this.templatePath(`${this.language}/src/config/index.js`),
       configFile = this.fs.read(configPath),
 
-      jsonPath = this.templatePath('_package.json'),
-      jsonNewPath = this.templatePath('package.json'),
+      jsonPath = this.templatePath(`${this.language}/_package.json`),
+      jsonNewPath = this.templatePath(`${this.language}/package.json`),
       jsonFile = JSON.parse(this.fs.read(jsonPath)),
 
-      envPath = this.templatePath('config/local.json.example'),
-      envNewPath = this.templatePath('config/local.json'),
-      stagNewPath = this.templatePath('config/staging.json'),
-      prodNewPath = this.templatePath('config/production.json'),
+      envPath = this.templatePath(`common/config/local.json.example`),
+      envNewPath = this.templatePath(`common/config/local.json`),
+      stagNewPath = this.templatePath(`common/config/staging.json`),
+      prodNewPath = this.templatePath(`common/config/production.json`),
       envFile = JSON.parse(this.fs.read(envPath)),
 
       filerBuffer   = this.fs.read(path),
       hook  = '/*******  plugins  *******/',
-      newBuffer = '',
-      configBuffer = '',
 
       arrFiles = [],
 
       dir = answers.subDirConfim ? answers.subDir + '/' : '';
+
+      let newBuffer = '',
+        configBuffer = '';
+
       _.set(answers,'dir', dir);
 
       if(_.keys(answers).length > 0){
@@ -77,7 +82,7 @@
           if(val){
             let i = _.findIndex(_plugins,{name: key} ), 
             usage = _plugins[i].usage,
-            dependencies = _plugins[i].dependencies,
+            install = _plugins[i].install,
             files = _plugins[i].files,
             env = _plugins[i].env,
             config = _plugins[i].config;
@@ -86,9 +91,9 @@
               configBuffer += config + '\n\n';
             }
 
-            if(dependencies){
-              _.forEach(dependencies, function(item){
-                _.set(jsonFile,`dependencies.${item.name}`,item.version); 
+            if(install && install.dependencies){
+              _.forEach(install.dependencies, function(item){
+                _.set(jsonFile,`install.dependencies.${item.name}`,item.version); 
               });
             }
 
@@ -137,61 +142,71 @@
 
     }
 
-    setNewDestinationRoot(newRoute){
+    setNewDestinationRoot(newRoute) {
       this.destinationRoot(newRoute);
     }
 
-    creatingConfigFiles(){
+    creatingConfigFiles() {
       this.fs.copy(
-        this.templatePath('.editorconfig'),
+        this.templatePath(`${this.language}/.editorconfig`),
         this.destinationPath('.editorconfig')
       );
       this.fs.copy(
-        this.templatePath('.eslintrc.json'),
+        this.templatePath(`${this.language}/.eslintrc.json`),
         this.destinationPath('.eslintrc.json')
       );
       this.fs.copy(
-        this.templatePath('_gitignore'),
+        this.templatePath('common/_gitignore'),
         this.destinationPath('.gitignore')
       );
       this.fs.copy(
-        this.templatePath('.nvmrc'),
+        this.templatePath(`${this.language}/.nvmrc`),
         this.destinationPath('.nvmrc')
       );
       this.fs.copyTpl(
-        this.templatePath('package.json'),
+        this.templatePath(`${this.language}/package.json`),
         this.destinationPath('package.json'), {
           name: this.props.name,
           author: this.props.author
         }
       );
       this.fs.copy(
-        this.templatePath('gulpfile.js'),
+        this.templatePath(`${this.language}/gulpfile.js`),
         this.destinationPath('gulpfile.js')
       );
       this.fs.copyTpl(
-        this.templatePath('README.md'),
+        this.templatePath(`${this.language}/README.md`),
         this.destinationPath('README.md'), {
           name: this.props.name
         }
       );
       this.fs.copy(
-        this.templatePath('server.js'),
+        this.templatePath(`${this.language}/server.js`),
         this.destinationPath('server.js')
       );
       this.fs.copy(
-        this.templatePath('serverless.yml'),
+        this.templatePath(`${this.language}/serverless.yml`),
         this.destinationPath('serverless.yml')
       );
     }
 
-    creatingAppFiles(){
+    creatingAppFiles() {
       this.fs.copy(
-        this.templatePath('config'),
-        this.destinationPath('config')
+        this.templatePath('common/config'),
+        this.destinationPath('src/config')
       );
 
-      if(this.props.services){
+      this.fs.copy(
+        this.templatePath(`${this.language}/src/config/index.js`),
+        this.destinationPath('src/config/index.js')
+      );
+
+      this.fs.copy(
+        this.templatePath(`${this.language}/src/config/env.js`),
+        this.destinationPath('src/config/env.js')
+      );
+
+      if(this.props.services) {
         _.forEach(this.props.services, (item) =>{
           this.fs.copy(
             this.templatePath(item),
@@ -201,44 +216,43 @@
       }
       else{
         this.fs.copy(
-          this.templatePath('services/.gitkeep'),
-          this.destinationPath('services/.gitkeep')
+          this.templatePath(`${this.language}/src/services/.gitkeep`),
+          this.destinationPath('src/services/.gitkeep')
         );  
       }
 
       this.fs.copy(
-        this.templatePath('skill'),
-        this.destinationPath('skill')
+        this.templatePath(`${this.language}/src/app/`),
+        this.destinationPath('src/app/')
       );
       this.fs.copy(
-        this.templatePath('speechAssets'),
-        this.destinationPath('speechAssets')
+        this.templatePath('common/speech-assets'),
+        this.destinationPath('speech-assets')
       );
       this.fs.copy(
-        this.templatePath('test'),
+        this.templatePath(`${this.language}/test`),
         this.destinationPath('test')
       );
     }
 
     removingUnnecessaryFiles(){
       //config files
-      this.fs.delete(this.templatePath('package.json'));
+      this.fs.delete(this.templatePath(`${this.language}/package.json`));
 
       //app files
-      this.fs.delete(this.templatePath('skill/MainStateMachine.js'));
-      this.fs.delete(this.destinationPath('skill/_MainStateMachine.js'));
+      this.fs.delete(this.templatePath(`${this.language}/src/app/main.js`));
+      this.fs.delete(this.destinationPath(`src/app/_main.js`));
 
-      this.fs.delete(this.templatePath('config/local.json'));
-      this.fs.delete(this.destinationPath('config/local.json.example'));
+      this.fs.delete(this.templatePath(`common/config/local.json`));
+      this.fs.delete(this.destinationPath('src/config/local.json.example'));
 
-      this.fs.delete(this.templatePath('config/production.json'));
-      this.fs.delete(this.destinationPath('config/production.json.example'));
+      this.fs.delete(this.templatePath('common/config/production.json'));
+      this.fs.delete(this.destinationPath('src/config/production.json.example'));
 
-      this.fs.delete(this.templatePath('config/staging.json'));
-      this.fs.delete(this.destinationPath('config/staging.json.example'));
+      this.fs.delete(this.templatePath('common/config/staging.json'));
+      this.fs.delete(this.destinationPath('src/config/staging.json.example'));
 
-      this.fs.delete(this.templatePath('config/index.js'));
-      this.fs.delete(this.destinationPath('config/_index.js'));
+      this.fs.delete(this.templatePath(`${this.language}/src/config/index.js`));
     }
 
   };
