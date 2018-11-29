@@ -51,11 +51,11 @@ AWS.config.update(_.merge({
     ],
     usage: `const UserStorage = require('../services/userStorage');
 const adapter = new UserStorage();
-Voxa.plugins.autoLoad(skill, { adapter });`
+Voxa.plugins.autoLoad(app, { adapter });`
   },
   {
     name: 'state-flow',
-    usage: 'Voxa.plugins.stateFlow(skill);'
+    usage: 'Voxa.plugins.stateFlow(app);'
   },
   {
     name: 'cloud-watch',
@@ -76,9 +76,9 @@ Voxa.plugins.autoLoad(skill, { adapter });`
 const cloudWatch = new AWS.CloudWatch({});
 const eventMetric = {
   MetricName: 'Caught Error', // Name of your metric
-  Namespace: 'SkillName' // Name of your skill
+  Namespace: 'appName' // Name of your app
 };
 
-Voxa.plugins.cloudWatch(skill, cloudWatch, eventMetric);`
+Voxa.plugins.cloudWatch(app, cloudWatch, eventMetric);`
   }
 ];

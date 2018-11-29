@@ -116,7 +116,7 @@
           }
         });
 
-        //creating MainStateMachine
+        //creating main
         newBuffer = filerBuffer.replace(hook, hook + '\n' + newBuffer + '\n');
         this.fs.write(newPath, newBuffer);
 

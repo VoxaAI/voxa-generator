@@ -1,30 +1,30 @@
-# generator-voxa-skill
+# generator-voxa
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-voxa-skill using [npm](https://www.npmjs.com/).
+First, install [Yeoman](http://yeoman.io) and generator-voxa using [npm](https://www.npmjs.com/).
 
 ```bash
 npm install -g yo
-npm install -g generator-voxa-skill
+npm install -g generator-voxa
 ```
 
 Then generate your new project in the directory that you prefers:
 
 ```bash
-yo voxa-skill
+yo voxa
 ```
 
-The generator is going to ask you some questions in order to customize your skill project.
+The generator is going to ask you some questions in order to customize your voxa app project.
 
 ### Directory Structure
 
 Your directory structure should look like this:
 
-	`config/` -> Environment variables or configuration
-	`services/` -> API clients, Authentications and Extras
-	`skill/` -> Amazon Echo Skill login, the state machine and flow
-	`speechAssets/` -> Amazon Echo Utterances, Intent Schema and Custom Slots.
+	`src/config/` -> Environment variables or configuration
+	`src/services/` -> API clients, Authentications and Extras
+	`src/app/` -> Voxa app, the state machine and flow
+	`speech-assets/` -> Amazon Utterances, Intent Schema, Custom Slots, etc
 	`tests/` -> Unit Tests
 	`server.js` -> Development server.
 	`gulpfile.js` -> Gulp tasks

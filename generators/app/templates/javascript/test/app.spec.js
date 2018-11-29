@@ -1,9 +1,9 @@
 'use strict';
 
-const skill = require('../skill/MainStateMachine');
+const app = require('../app');
 const expect = require('chai').expect;
 
-describe('Skill', () => {
+describe('App', () => {
   it('should reply with Intent.Launch', () => {
     const event = {
       session: {
@@ -16,7 +16,7 @@ describe('Skill', () => {
       },
     };
 
-    return skill.execute(event)
+    return app.execute(event)
       .then((reply) => {
         expect(reply.toJSON().response.outputSpeech.ssml).to.equal('<speak>Welcome!</speak>');
       });

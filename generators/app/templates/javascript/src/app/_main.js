@@ -6,10 +6,10 @@ const views = require('./views');
 const variables = require('./variables');
 const states = require('./states');
 
-const skill = new Voxa({ variables, views });
-states.register(skill);
+const app = new Voxa({ variables, views });
+states.register(app);
 
 /*******  plugins  *******/
 /*****  plugins end *****/
 
-module.exports = skill;
+module.exports = app;
