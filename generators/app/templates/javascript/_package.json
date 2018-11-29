@@ -25,7 +25,7 @@
   "dependencies": {
     "bluebird":"^3.3.5",
     "lodash":"^4.17.11",
-    "voxa":"^3.0.0-alpha32"
+    "voxa":"^3.0.0-alpha38"
   },
   "devDependencies": {
     "chai":"^3.5.0",

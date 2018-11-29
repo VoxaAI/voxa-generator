@@ -9,8 +9,8 @@ const initialPrompt = [
   }, {
     type    : 'input',
     name    : 'author',
-    message : 'Please enter your name/company?',
-    default: 'Author <author@example.com> (http://example.com)'
+    message : 'Please enter your name/company as follow: Full Name <author@example.com> (http://example.com)',
+    default: 'Full Name <author@example.com> (http://example.com)'
   },{
     type    : 'confirm',
     name    : 'subDirConfim',
