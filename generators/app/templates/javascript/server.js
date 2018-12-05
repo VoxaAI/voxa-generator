@@ -51,6 +51,7 @@ _.forEach({
   if (!platform) {
     return;
   }
+  
   console.log(`Enabling /${platformPath} endpoint for ${platform.constructor.name}.`);
   router.post(`/${platformPath}`, (req, res, next) => {
     function callback(err, msg) {
