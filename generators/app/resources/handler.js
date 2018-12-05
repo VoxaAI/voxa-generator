@@ -6,6 +6,12 @@
     pluginsPrompt = questions.pluginsPrompt,
     installPrompt = questions.installPrompt,
     _plugins = require('./plugins');
+  
+  function requiresToString(requiresObject) {
+    return _.reduce(requiresObject, (str, value, key) => {
+      return `const ${key} = require('${value}');\n`;
+    }, '');
+  }
 
   module.exports = class PromptHandler {
 
@@ -33,7 +39,6 @@
         return answers;
       });
     }
-
 
     setPlugins(answers) {
       return this.prompt(pluginsPrompt)
@@ -66,13 +71,16 @@
       envFile = JSON.parse(this.fs.read(envPath)),
 
       filerBuffer   = this.fs.read(path),
+      requiresHook = '/*******  requires  *******/',
       hook  = '/*******  plugins  *******/',
 
       arrFiles = [],
 
       dir = answers.subDirConfim ? answers.subDir + '/' : '';
 
-      let newBuffer = '',
+      let newRequires = {},
+        newBuffer = '',
+        configRequires = {},
         configBuffer = '';
 
       _.set(answers,'dir', dir);
@@ -81,14 +89,20 @@
         _.forIn(plugins, (val, key) =>{
           if(val){
             let i = _.findIndex(_plugins,{name: key} ), 
+            requires = _plugins[i].requires,
             usage = _plugins[i].usage,
             install = _plugins[i].install,
             files = _plugins[i].files,
             env = _plugins[i].env,
             config = _plugins[i].config;
 
-            if(config){
-              configBuffer += config + '\n\n';
+            if(requires) {
+              newRequires = { ...(newRequires || {}), ...requires };
+            }
+
+            if(config) {
+              configRequires = { ...(configRequires || {}), ...config.requires };
+              configBuffer += config.usage + '\n\n';
             }
 
             if(install && install.dependencies){
@@ -117,19 +131,21 @@
         });
 
         //creating main
-        newBuffer = filerBuffer.replace(hook, hook + '\n' + newBuffer + '\n');
+        newBuffer = filerBuffer.replace(hook, hook + '\n' + newBuffer.trimRight());
+        newBuffer = newBuffer.replace(requiresHook, requiresHook + '\n' + requiresToString(newRequires).trim());
         this.fs.write(newPath, newBuffer);
 
         //creating config/index.js
-        configBuffer = configFile.replace(hook, hook + '\n' + configBuffer + '\n');
+        configBuffer = configFile.replace(hook, hook + '\n' + configBuffer.trimRight());
+        configBuffer = configBuffer.replace(requiresHook, requiresHook + '\n' + requiresToString(configRequires).trimRight());
         this.fs.write(configNewPath, configBuffer);
 
         //creating package.json
         this.fs.write(jsonNewPath,JSON.stringify(jsonFile, null, '\t'));
       }
 
-      if(arrFiles.length > 0){
-      _.set(answers,'services', arrFiles);  
+      if(arrFiles.length > 0) {
+        _.set(answers,'services', arrFiles);  
       }
 
       _.set(answers,'env', envFile);  
@@ -139,7 +155,6 @@
 
       this.props = answers;
       return this.props;
-
     }
 
     setNewDestinationRoot(newRoute) {
@@ -209,8 +224,8 @@
       if(this.props.services) {
         _.forEach(this.props.services, (item) =>{
           this.fs.copy(
-            this.templatePath(item),
-            this.destinationPath(item)
+            this.templatePath(`${this.language}/src/${item}`),
+            this.destinationPath(`src/${item}`)
           );
         });
       }

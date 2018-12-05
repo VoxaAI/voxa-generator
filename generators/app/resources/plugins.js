@@ -13,11 +13,13 @@ module.exports = [
         version: '^1.0.0'
       }
     ],
-    config: `const AWS = require('aws-sdk');
-const https = require('https');
-const _ = require('lodash');
-
-AWS.config.update(_.merge({
+    config: {
+      requires: {
+        AWS: 'aws-sdk',
+        https: 'https',
+        _: 'lodash',
+      },
+      usage: `AWS.config.update(_.merge({
   maxRetries: 8,
   httpOptions: {
     /**
@@ -31,7 +33,8 @@ AWS.config.update(_.merge({
       ciphers: 'ALL',
     }),
   },
-}, configFile.aws));`,
+}, configFile.aws));`
+    },
     files: [
       'services/userStorage.js'
     ],
@@ -49,13 +52,15 @@ AWS.config.update(_.merge({
         }
       }
     ],
-    usage: `const UserStorage = require('../services/userStorage');
-const adapter = new UserStorage();
-Voxa.plugins.autoLoad(app, { adapter });`
+    requires: {
+      UserStorage: '../services/userStorage',
+    },
+    usage: `  const adapter = new UserStorage();
+  Voxa.plugins.autoLoad(app, { adapter });`
   },
   {
     name: 'state-flow',
-    usage: 'Voxa.plugins.stateFlow(app);'
+    usage: '  Voxa.plugins.stateFlow(app);'
   },
   {
     name: 'cloud-watch',
@@ -72,13 +77,15 @@ Voxa.plugins.autoLoad(app, { adapter });`
         }
       }
     ],
-    usage: `const AWS = require("aws-sdk");
-const cloudWatch = new AWS.CloudWatch({});
-const eventMetric = {
-  MetricName: 'Caught Error', // Name of your metric
-  Namespace: 'appName' // Name of your app
-};
+    requires: {
+      AWS: 'aws-sdk',
+    },
+    usage: `  const cloudWatch = new AWS.CloudWatch({});
+  const eventMetric = {
+    MetricName: 'Caught Error', // Name of your metric
+    Namespace: 'appName' // Name of your app
+  };
 
-Voxa.plugins.cloudWatch(app, cloudWatch, eventMetric);`
+  Voxa.plugins.cloudWatch(app, cloudWatch, eventMetric);`
   }
 ];
