@@ -14,7 +14,7 @@ const router = express.Router();
 const {
   alexaSkill,
   botframeworkSkill,
-  dialogFlowAction,
+  dialogflowAction,
 } = require('./src/app');
 
 console.log(`${'Attempting to start.\r\n\t' +
@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 _.forEach({
   alexa: alexaSkill,
   botframework: botframeworkSkill,
-  dialogFlow: dialogFlowAction,
+  dialogflow: dialogflowAction,
 }, (platform, platformPath) => {
   if (!platform) {
     return;

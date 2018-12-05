@@ -1,9 +1,11 @@
 'use strict';
 
-const states = require('./states');
+const states = [
+  require('./states/launch.states'),
+]
 
 function register(app) {
-  states.register(app);
+  states.forEach(state => state.register(app));
 }
 
 /*******  plugins  *******/
