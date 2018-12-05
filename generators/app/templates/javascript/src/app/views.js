@@ -12,4 +12,9 @@ const views = (function views() {
     },
   };
 }());
-module.exports = views;
+
+module.exports = {
+  en: {
+    translation: views,
+  },
+};
