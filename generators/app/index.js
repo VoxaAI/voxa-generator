@@ -1,11 +1,10 @@
-'use strict';
+"use strict";
 
-const Generator = require('yeoman-generator'),
-PromptHandler = require('./resources/handler'),
-handler = new PromptHandler();
+const Generator = require("yeoman-generator"),
+  PromptHandler = require("./resources/handler"),
+  handler = new PromptHandler();
 
 module.exports = Generator.extend({
-
   // Configurations will be loaded here.
   // Ask for user input
   prompting() {
