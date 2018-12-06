@@ -1,10 +1,11 @@
-'use strict';
+"use strict";
 
 /*******  requires  *******/
 
+// prettier-ignore
 const states = [
-  require('./states/launch.states'),
-]
+  require("./states/launch.states"),
+];
 
 function register(app) {
   states.forEach(state => state.register(app));

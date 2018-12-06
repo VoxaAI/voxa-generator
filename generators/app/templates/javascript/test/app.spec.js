@@ -1,24 +1,24 @@
-'use strict';
+"use strict";
 
-const app = require('../app');
-const expect = require('chai').expect;
+const app = require("../app");
+const expect = require("chai").expect;
 
-describe('App', () => {
-  it('should reply with Intent.Launch', () => {
+describe("App", () => {
+  it("should reply with Intent.Launch", () => {
     const event = {
       session: {
         application: {
-          applicationId: '',
+          applicationId: "",
         },
       },
       request: {
-        type: 'LaunchRequest',
+        type: "LaunchRequest",
       },
     };
 
     return app.execute(event)
       .then((reply) => {
-        expect(reply.toJSON().response.outputSpeech.ssml).to.equal('<speak>Welcome!</speak>');
+        expect(reply.toJSON().response.outputSpeech.ssml).to.equal("<speak>Welcome!</speak>");
       });
   });
 });

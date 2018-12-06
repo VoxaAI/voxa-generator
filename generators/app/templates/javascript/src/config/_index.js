@@ -1,7 +1,8 @@
-'use strict';
+"use strict";
 
-const path = require('path');
-const env = require('./env').toLowerCase();
+const path = require("path");
+const env = require("./env").toLowerCase();
+
 /*******  requires  *******/
 
 const configFile = require(path.join(__dirname, `${env}.json`));

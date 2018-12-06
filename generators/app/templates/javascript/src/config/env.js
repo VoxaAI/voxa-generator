@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 function getEnv() {
   if (process.env.NODE_ENV) {
@@ -6,13 +6,13 @@ function getEnv() {
   }
   if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
     // TODO put your own lambda function name here
-    if (process.env.AWS_LAMBDA_FUNCTION_NAME === '') {
-      return 'production';
+    if (process.env.AWS_LAMBDA_FUNCTION_NAME === "") {
+      return "production";
     }
-    return 'staging';
+    return "staging";
   }
 
-  return 'local';
+  return "local";
 }
 
 module.exports = getEnv();
