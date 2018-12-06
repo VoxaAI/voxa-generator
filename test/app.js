@@ -4,7 +4,7 @@ const //Generator = require('../generators/app/index'),
 	assert = require('yeoman-assert'),
 	path = require('path'),
 	chai = require('chai'),
-    chaiAsPromised = require('chai-as-promised');
+  chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
