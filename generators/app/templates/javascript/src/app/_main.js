@@ -1,7 +1,6 @@
 "use strict";
 
 /*******  requires  *******/
-
 // prettier-ignore
 const states = [
   require("./states/launch.states"),
