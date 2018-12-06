@@ -2,17 +2,17 @@
   "name": "<%= name %>",
   "version": "0.1.0",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "",
   "scripts": {
     "test": "mocha --recursive test/**/*.spec.js",
-    "watch": "node node_modules/gulp/bin/gulp.js watch",
-    "lint": "eslint src/ gulpfile.js speech-assets/ test/ server.js"
+    "watch": "nodemon server.js",
+    "lint": "eslint src/ speech-assets/ test/ server.js"
   },
   "author": "<%= author %>",
   "engines": {
     "node": ">=8.10"
   },
-  "keywords":[
+  "keywords": [
     "alexa skill",
     "skills",
     "google actions",
@@ -39,11 +39,20 @@
     "eslint": "^3.15.0",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "gulp": "^3.9.1",
-    "gulp-nodemon": "^2.0.7",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "nodemon": "^1.18.7"
   },
   "directories": {
     "test": "test"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/*",
+      "server.js"
+    ],
+    "ext": "json js",
+    "ignore": [
+      "node_modules/**/*"
+    ]
   }
 }
