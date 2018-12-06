@@ -8,17 +8,18 @@ describe("App", () => {
     const event = {
       session: {
         application: {
-          applicationId: "",
-        },
+          applicationId: ""
+        }
       },
       request: {
-        type: "LaunchRequest",
-      },
+        type: "LaunchRequest"
+      }
     };
 
-    return app.execute(event)
-      .then((reply) => {
-        expect(reply.toJSON().response.outputSpeech.ssml).to.equal("<speak>Welcome!</speak>");
-      });
+    return app.execute(event).then(reply => {
+      expect(reply.toJSON().response.outputSpeech.ssml).to.equal(
+        "<speak>Welcome!</speak>"
+      );
+    });
   });
 });
