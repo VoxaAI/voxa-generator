@@ -9,7 +9,7 @@
   
   function requiresToString(requiresObject) {
     return _.reduce(requiresObject, (str, value, key) => {
-      return `const ${key} = require('${value}');\n`;
+      return `${str}\nconst ${key} = require('${value}');`;
     }, '');
   }
 
@@ -91,7 +91,7 @@
             let i = _.findIndex(_plugins,{name: key} ), 
             requires = _plugins[i].requires,
             usage = _plugins[i].usage,
-            install = _plugins[i].install,
+            dependencies = _plugins[i].dependencies,
             files = _plugins[i].files,
             env = _plugins[i].env,
             config = _plugins[i].config;
@@ -105,9 +105,9 @@
               configBuffer += config.usage + '\n\n';
             }
 
-            if(install && install.dependencies){
-              _.forEach(install.dependencies, function(item){
-                _.set(jsonFile,`install.dependencies.${item.name}`,item.version); 
+            if(dependencies) {
+              _.forEach(dependencies, function(item){
+                _.set(jsonFile,`dependencies.${item.name}`,item.version); 
               });
             }
 
@@ -184,10 +184,6 @@
           name: this.props.name,
           author: this.props.author
         }
-      );
-      this.fs.copy(
-        this.templatePath(`${this.language}/gulpfile.js`),
-        this.destinationPath('gulpfile.js')
       );
       this.fs.copyTpl(
         this.templatePath(`${this.language}/README.md`),

@@ -53,14 +53,16 @@ module.exports = [
       }
     ],
     requires: {
+      AWS: 'aws-sdk',
+      voxa: 'voxa',
       UserStorage: '../services/userStorage',
     },
     usage: `  const adapter = new UserStorage();
-  Voxa.plugins.autoLoad(app, { adapter });`
+  voxa.plugins.autoLoad(app, { adapter });`
   },
   {
     name: 'state-flow',
-    usage: '  Voxa.plugins.stateFlow(app);'
+    usage: '  voxa.plugins.stateFlow(app);'
   },
   {
     name: 'cloud-watch',
@@ -86,6 +88,6 @@ module.exports = [
     Namespace: 'appName' // Name of your app
   };
 
-  Voxa.plugins.cloudWatch(app, cloudWatch, eventMetric);`
+  voxa.plugins.cloudWatch(app, cloudWatch, eventMetric);`
   }
 ];
