@@ -1,0 +1,2 @@
+import { IVoxaEvent } from "voxa";
+
