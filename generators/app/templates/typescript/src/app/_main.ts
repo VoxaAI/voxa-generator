@@ -1,9 +1,7 @@
-import * as launch from "./states/launch.states";
-
 /*******  requires  *******/
 // prettier-ignore
 const states = [
-  launch,
+  require('./states/launch.states'),
 ];
 
 export function register(app) {

@@ -20,7 +20,7 @@ alexaStates.register(alexaSkill);
 exports.alexa = RavenLambdaWrapper.handler(Raven, alexaSkill.lambda());
 exports.alexaSkill = alexaSkill;
 
-// dialogFlow
+// dialogflow
 const dialogflowAction = new voxa.DialogFlowPlatform(app);
 dialogflowStates.register(dialogflowAction);
 exports.dialogflow = RavenLambdaWrapper.handler(

@@ -1,6 +1,6 @@
 "use strict";
 
-const app = require("../app");
+const app = require("../src/app");
 const expect = require("chai").expect;
 
 describe("App", () => {

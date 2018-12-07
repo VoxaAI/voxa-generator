@@ -1,12 +1,14 @@
 import * as path from "path";
-import * as _env from "./env";
+import * as fs from "fs";
+import _env from "./env";
 
 const env = _env.toLowerCase();
 
 /*******  requires  *******/
 /*****  requires end *****/
 
-import * as configFile from path.join(__dirname, `${env}.json`);
+const config = fs.readFileSync(path.join(__dirname, `${env}.json`), 'utf8');
+const configFile = JSON.parse(config);
 configFile.env = env;
 
 /*******  plugins  *******/

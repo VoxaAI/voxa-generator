@@ -24,12 +24,15 @@
     "app"
   ],
   "dependencies": {
+    "@types/node": "^10.12.12",
     "lodash": "^4.17.4",
     "path": "^0.12.7",
     "simple-mock": "^0.7.3",
     "yeoman-generator": "^1.0.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "eslint": "^3.19.0",
