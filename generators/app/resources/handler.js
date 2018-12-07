@@ -51,13 +51,17 @@ module.exports = class PromptHandler {
   finishPrompts(answers) {
     const { language } = answers.install;
     this.language = language.toLowerCase();
+    this.ext = {
+      javascript: js,
+      typescript: ts
+    }[this.language];
 
     const plugins = answers.plugins,
-      path = this.templatePath(`${this.language}/src/app/_main.js`),
-      newPath = this.templatePath(`${this.language}/src/app/main.js`),
+      path = this.templatePath(`${this.language}/src/app/_main.${this.ext}`),
+      newPath = this.templatePath(`${this.language}/src/app/main.${this.ext}`),
 
-      configPath = this.templatePath(`${this.language}/src/config/_index.js`),
-      configNewPath = this.templatePath(`${this.language}/src/config/index.js`),
+      configPath = this.templatePath(`${this.language}/src/config/_index.${this.ext}`),
+      configNewPath = this.templatePath(`${this.language}/src/config/index.${this.ext}`),
       configFile = this.fs.read(configPath),
 
       jsonPath = this.templatePath(`${this.language}/_package.json`),
@@ -162,13 +166,19 @@ module.exports = class PromptHandler {
   }
 
   creatingConfigFiles() {
+    switch (this.language) {
+      case 'javascript':
+        this.fs.copy(
+          this.templatePath(`${this.language}/.eslintrc.json`),
+          this.destinationPath('.eslintrc.json')
+        );
+      break;
+      case 'typescript':
+      break;
+    }
     this.fs.copy(
       this.templatePath(`${this.language}/.editorconfig`),
       this.destinationPath('.editorconfig')
-    );
-    this.fs.copy(
-      this.templatePath(`${this.language}/.eslintrc.json`),
-      this.destinationPath('.eslintrc.json')
     );
     this.fs.copy(
       this.templatePath('common/_gitignore'),
@@ -192,8 +202,8 @@ module.exports = class PromptHandler {
       }
     );
     this.fs.copy(
-      this.templatePath(`${this.language}/server.js`),
-      this.destinationPath('server.js')
+      this.templatePath(`${this.language}/server.${this.ext}`),
+      this.destinationPath(`server.${this.ext}`)
     );
     this.fs.copy(
       this.templatePath(`${this.language}/serverless.yml`),
@@ -208,13 +218,13 @@ module.exports = class PromptHandler {
     );
 
     this.fs.copy(
-      this.templatePath(`${this.language}/src/config/index.js`),
-      this.destinationPath('src/config/index.js')
+      this.templatePath(`${this.language}/src/config/index.${this.ext}`),
+      this.destinationPath(`src/config/index.${this.ext}`)
     );
 
     this.fs.copy(
-      this.templatePath(`${this.language}/src/config/env.js`),
-      this.destinationPath('src/config/env.js')
+      this.templatePath(`${this.language}/src/config/env.${this.ext}`),
+      this.destinationPath(`src/config/env.${this.ext}`)
     );
 
     if (this.props.services) {
@@ -251,8 +261,8 @@ module.exports = class PromptHandler {
     this.fs.delete(this.templatePath(`${this.language}/package.json`));
 
     //app files
-    this.fs.delete(this.templatePath(`${this.language}/src/app/main.js`));
-    this.fs.delete(this.destinationPath(`src/app/_main.js`));
+    this.fs.delete(this.templatePath(`${this.language}/src/app/main.${this.ext}`));
+    this.fs.delete(this.destinationPath(`src/app/_main.${this.ext}`));
 
     this.fs.delete(this.templatePath(`common/config/local.json`));
     this.fs.delete(this.destinationPath('src/config/local.json.example'));
@@ -263,7 +273,7 @@ module.exports = class PromptHandler {
     this.fs.delete(this.templatePath('common/config/staging.json'));
     this.fs.delete(this.destinationPath('src/config/staging.json.example'));
 
-    this.fs.delete(this.templatePath(`${this.language}/src/config/index.js`));
+    this.fs.delete(this.templatePath(`${this.language}/src/config/index.${this.ext}`));
   }
 
 };
