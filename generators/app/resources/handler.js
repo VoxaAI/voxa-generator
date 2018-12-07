@@ -175,7 +175,7 @@ module.exports = class PromptHandler {
       this.destinationPath('.gitignore')
     );
     this.fs.copy(
-      this.templatePath(`${this.language}/.nvmrc`),
+      this.templatePath(`common/.nvmrc`),
       this.destinationPath('.nvmrc')
     );
     this.fs.copyTpl(
