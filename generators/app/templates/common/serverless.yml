@@ -21,12 +21,10 @@ provider:
   name: aws
   runtime: nodejs8.10
 
-
 functions:
-  skill:
+  alexa:
     handler: src/app/index.alexa
     events:
-      - alexaSkill
+      - alexaSkill: ${env:SKILL_ID}
     environment: 
       DEBUG: voxa
-
