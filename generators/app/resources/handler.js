@@ -177,7 +177,7 @@ module.exports = class PromptHandler {
       break;
     }
     this.fs.copy(
-      this.templatePath(`${this.language}/.editorconfig`),
+      this.templatePath(`common/.editorconfig`),
       this.destinationPath('.editorconfig')
     );
     this.fs.copy(
