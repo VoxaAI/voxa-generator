@@ -1,22 +1,21 @@
-/*eslint no-console: "off"*/
-"use strict";
-
-const express = require("express");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
-const http = require("http");
-const Raven = require("raven");
-const uuid = require("uuid");
-const _ = require("lodash");
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import * as morgan from "morgan";
+import * as http from "http";
+import * as Raven from "raven";
+import * as uuid from "uuid";
+import * as _ from "lodash";
 
 Raven.config().install();
 
-const router = new express.Router();
-const {
+const router = express.Router();
+import {
   alexaSkill,
   botframeworkSkill,
   dialogflowAction
-} = require("./src/app");
+} from "./src/app";
+
+console.log('alexa', alexaSkill);
 
 console.log(
   `${"Attempting to start.\r\n\tNode version: "}${

@@ -4,7 +4,7 @@ import * as voxa from "voxa";
 import * as alexaStates from "./states/alexa.states";
 import * as dialogflowStates from "./states/dialogflow.states";
 import * as variables from "./variables";
-import * as views from "./views";
+import views from "./views";
 import * as main from "./main";
 
 const app = new voxa.VoxaApp({ variables, views });

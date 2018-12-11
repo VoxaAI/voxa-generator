@@ -11,7 +11,7 @@ const views = (function views() {
   };
 })();
 
-export = {
+export default {
   en: {
     translation: views
   }
