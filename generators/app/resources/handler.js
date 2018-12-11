@@ -174,6 +174,14 @@ module.exports = class PromptHandler {
         );
       break;
       case 'typescript':
+        this.fs.copy(
+          this.templatePath(`${this.language}/tsconfig.json`),
+          this.destinationPath('tsconfig.json')
+        );
+        this.fs.copy(
+          this.templatePath(`${this.language}/tslint.json`),
+          this.destinationPath('tslint.json')
+        );
       break;
     }
     this.fs.copy(

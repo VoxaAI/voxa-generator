@@ -22,7 +22,7 @@ exports.alexaSkill = alexaSkill;
 
 // dialogflow
 const dialogflowAction = new voxa.DialogFlowPlatform(app);
-dialogflowStates.register(dialogflowAction);
+dialogflowStates.register(app);
 exports.dialogflow = RavenLambdaWrapper.handler(
   Raven,
   dialogflowAction.lambdaHTTP()

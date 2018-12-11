@@ -4,9 +4,9 @@
   "description": "",
   "main": "",
   "scripts": {
-    "test": "mocha --recursive test/**/*.spec.js",
-    "watch": "nodemon server.js",
-    "lint": "eslint src/ speech-assets/ test/ server.js"
+    "test": "mocha --recursive test/**/*.spec.ts",
+    "watch": "nodemon server.ts",
+    "lint": "tslint --config tslint.json --project tsconfig.json"
   },
   "author": "<%= author %>",
   "engines": {
