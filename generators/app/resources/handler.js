@@ -52,8 +52,8 @@ module.exports = class PromptHandler {
     const { language } = answers.install;
     this.language = language.toLowerCase();
     this.ext = {
-      javascript: js,
-      typescript: ts
+      javascript: 'js',
+      typescript: 'ts'
     }[this.language];
 
     const plugins = answers.plugins,
