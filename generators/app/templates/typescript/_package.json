@@ -33,7 +33,7 @@
     "raven": "^2.6.4",
     "serverless-sentry": "^1.2.0",
     "serverless-sentry-lib": "^1.1.2",
-    "voxa": "3.0.0-alpha38"
+    "voxa": "3.0.0-alpha39"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
