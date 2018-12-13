@@ -5,6 +5,8 @@ import * as http from "http";
 import * as Raven from "raven";
 import * as uuid from "uuid";
 import * as _ from "lodash";
+import { AlexaPlatform } from "voxa";
+import { RequestEnvelope } from "ask-sdk-model";
 
 Raven.config().install();
 
@@ -76,10 +78,17 @@ _.forEach(
         done: callback
       };
 
-      platform
-        .execute(req.body, {})
-        .then(context.succeed)
-        .catch(context.fail);
+      if (platform instanceof AlexaPlatform) {
+        platform
+          .execute(req.body as RequestEnvelope)
+          .then(context.succeed)
+          .catch(context.fail);
+      } else {
+        platform
+          .execute(req.body)
+          .then(context.succeed)
+          .catch(context.fail);
+      }
     });
   }
 );
