@@ -182,6 +182,10 @@ module.exports = class PromptHandler {
           this.templatePath(`${this.language}/tslint.json`),
           this.destinationPath('tslint.json')
         );
+        this.fs.copy(
+          this.templatePath(`${this.language}/nodemon.json`),
+          this.destinationPath('nodemon.json')
+        );
       break;
     }
     this.fs.copy(

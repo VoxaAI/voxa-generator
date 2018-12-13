@@ -45,15 +45,5 @@
   },
   "directories": {
     "test": "test"
-  },
-  "nodemonConfig": {
-    "watch": [
-      "src/*",
-      "server.js"
-    ],
-    "ext": "json js",
-    "ignore": [
-      "node_modules/**/*"
-    ]
   }
 }

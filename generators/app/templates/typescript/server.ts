@@ -11,11 +11,9 @@ Raven.config().install();
 const router = express.Router();
 import {
   alexaSkill,
-  botframeworkSkill,
+  // botframeworkSkill,
   dialogflowAction
 } from "./src/app";
-
-console.log('alexa', alexaSkill);
 
 console.log(
   `${"Attempting to start.\r\n\tNode version: "}${
@@ -31,7 +29,7 @@ app.all("/*", (req, res, next) => {
     "Access-Control-Allow-Origin",
     "http://ask-ifr-download.s3.amazonaws.com"
   );
-  req.header("Access-Control-Allow-Methods", "GET");
+  res.header("Access-Control-Allow-Methods", "GET");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
@@ -50,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 _.forEach(
   {
     alexa: alexaSkill,
-    botframework: botframeworkSkill,
+    // botframework: botframeworkSkill,
     dialogflow: dialogflowAction
   },
   (platform, platformPath) => {
@@ -62,7 +60,7 @@ _.forEach(
       `Enabling /${platformPath} endpoint for ${platform.constructor.name}.`
     );
     router.post(`/${platformPath}`, (req, res, next) => {
-      function callback(err, msg) {
+      function callback(err, msg?) {
         if (err) {
           console.error(err.message ? err.message : err);
           return next(err);

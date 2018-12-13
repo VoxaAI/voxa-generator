@@ -14,7 +14,7 @@ Raven.config().install();
 const router = new express.Router();
 const {
   alexaSkill,
-  botframeworkSkill,
+  // botframeworkSkill,
   dialogflowAction
 } = require("./src/app");
 
@@ -32,7 +32,7 @@ app.all("/*", (req, res, next) => {
     "Access-Control-Allow-Origin",
     "http://ask-ifr-download.s3.amazonaws.com"
   );
-  req.header("Access-Control-Allow-Methods", "GET");
+  res.header("Access-Control-Allow-Methods", "GET");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
@@ -51,7 +51,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 _.forEach(
   {
     alexa: alexaSkill,
-    botframework: botframeworkSkill,
+    // botframework: botframeworkSkill,
     dialogflow: dialogflowAction
   },
   (platform, platformPath) => {

@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
+    "@types/express": "^4.16.0",
     "@types/mocha": "^5.2.5",
     "chai": "^3.5.0",
 		"eslint": "^3.15.0",
@@ -44,19 +45,11 @@
 		"eslint-plugin-prettier": "^3.0.0",
 		"mocha": "^3.2.0",
 		"nodemon": "^1.18.7",
-		"prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "ts-node": "^7.0.1",
+		"typescript": "^3.2.2"
   },
   "directories": {
     "test": "test"
-  },
-  "nodemonConfig": {
-    "watch": [
-      "src/*",
-      "server.js"
-    ],
-    "ext": "json js",
-    "ignore": [
-      "node_modules/**/*"
-    ]
   }
 }
