@@ -37,16 +37,19 @@
     "chai-as-promised": "^6.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.2",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "istanbul": "^0.4.5",
     "mocha": "*",
+    "prettier": "^1.15.3",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.6.0"
   },
   "repository": "mediarain/voxa-generator",
   "scripts": {
     "test": "istanbul cover _mocha -- --recursive test",
-    "lint": "node_modules/.bin/eslint generators/ test/",
+    "lint": "eslint generators/ test/",
     "cobertura": "istanbul report cobertura --root coverage"
   },
   "license": "MIT"
