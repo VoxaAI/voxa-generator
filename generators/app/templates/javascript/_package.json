@@ -1,7 +1,7 @@
 {
   "name": "<%= name %>",
   "version": "0.1.0",
-  "description": "",
+  "description": "<%= description %>",
   "main": "",
   "scripts": {
     "test": "mocha --recursive test/**/*.spec.js",
