@@ -1,6 +1,7 @@
 "use strict";
 
-/*******  requires  *******/
+/**  requires  **/
+/**  requires end  **/
 // prettier-ignore
 const states = [
   require("./states/launch.states"),
@@ -15,8 +16,8 @@ function register(app) {
   // expect voxaEvent and reply params.
   // i.e. app.onCanFulfillIntentRequest((voxaEvent, reply) => {});
 
-  /*******  plugins  *******/
-  /*****  plugins end *****/
+  /**  plugins  **/
+  /**  plugins end  **/
 }
 
 module.exports.register = register;

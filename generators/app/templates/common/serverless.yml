@@ -20,6 +20,10 @@ service: starter-kit
 provider:
   name: aws
   runtime: nodejs8.10
+<<<<<<< HEAD:generators/app/templates/common/serverless.yml
+=======
+
+>>>>>>> dev:generators/app/templates/serverless.yml
 
 functions:
   alexa:

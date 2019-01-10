@@ -10,33 +10,21 @@ const PromptHandler = require('../generators/app/resources/handler'),
   chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
-const expect = chai.expect;
+// const expect = chai.expect;
 
 describe('Generator Handler', () => {
 	it('initialPrompt function', () => {
 	});
 
-	it('secondPrompt function', () => {
-		
-	});
+	it('secondPrompt function');
 
-	it('setPlugins function', () => {
-		
-	});
+	it('setPlugins function');
 
-	it('finishPrompts function', () => {
-		
-	});
+	it('finishPrompts function');
 
-	it('creatingConfigFiles function', () => {
-		
-	});
+	it('creatingConfigFiles function');
 
-	it('creatingAppFiles function', () => {
-		
-	});
+	it('creatingAppFiles function');
 
-	it('removingUnnecessaryFiles function', () => {
-		
-	});
+	it('removingUnnecessaryFiles function');
 });

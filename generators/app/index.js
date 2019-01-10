@@ -33,7 +33,9 @@ module.exports = Generator.extend({
     // Install Dependencies if wanted
     install: function() {
       if (this.props.dependencies) {
-        this.installDependencies();
+        // REMOVE: 
+        // this.installDependencies();
+        this.yarnInstall();
       }
     }
   }

@@ -74,8 +74,8 @@ module.exports = class PromptHandler {
       prodNewPath = this.templatePath(`common/config/production.json`),
       envFile = JSON.parse(this.fs.read(envPath)),
       filerBuffer = this.fs.read(path),
-      requiresHook = "/*******  requires  *******/",
-      hook = "/*******  plugins  *******/",
+      requiresHook = "/**  requires  **/",
+      hook = "/**  plugins  **/",
       arrFiles = [],
       dir = answers.subDirConfim ? answers.subDir + "/" : "";
 
@@ -217,7 +217,8 @@ module.exports = class PromptHandler {
       this.templatePath(`${this.language}/package.json`),
       this.destinationPath("package.json"),
       {
-        name: this.props.name,
+        name: _.kebabCase(this.props.name),
+        description: this.props.description,
         author: this.props.author
       }
     );
@@ -225,7 +226,8 @@ module.exports = class PromptHandler {
       this.templatePath(`${this.language}/README.md`),
       this.destinationPath("README.md"),
       {
-        name: this.props.name
+        name: this.props.name,
+        description: this.props.description
       }
     );
     this.fs.copy(
