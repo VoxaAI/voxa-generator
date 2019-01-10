@@ -1,5 +1,7 @@
-import * as app from "../src/app";
+/* tslint:disable:object-literal-sort-keys */
+
 import { expect } from "chai";
+import { alexaSkill } from "../src/app";
 
 describe("App", () => {
   it("should reply with Intent.Launch", () => {
@@ -14,8 +16,8 @@ describe("App", () => {
       }
     };
 
-    return app.execute(event).then(reply => {
-      expect(reply.toJSON().response.outputSpeech.ssml).to.equal(
+    return alexaSkill.execute(event).then(reply => {
+      expect(reply.response.outputSpeech.ssml).to.equal(
         "<speak>Welcome!</speak>"
       );
     });

@@ -1,11 +1,11 @@
-const views = (function views() {
+const views = (() => {
   return {
     Intent: {
-      Launch: {
-        tell: "Welcome!"
-      },
       Help: {
         say: "Some help text here."
+      },
+      Launch: {
+        tell: "Welcome!"
       }
     }
   };

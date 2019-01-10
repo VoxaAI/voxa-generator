@@ -1,11 +1,11 @@
 import * as Raven from "raven"; // Official `raven` module
 import * as RavenLambdaWrapper from "serverless-sentry-lib";
 import * as voxa from "voxa";
+import * as main from "./main";
 import * as alexaStates from "./states/alexa.states";
 import * as dialogflowStates from "./states/dialogflow.states";
 import * as variables from "./variables";
 import views from "./views";
-import * as main from "./main";
 
 const app = new voxa.VoxaApp({ variables, views });
 

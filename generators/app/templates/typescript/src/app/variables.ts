@@ -1,5 +1,5 @@
-import { IVoxaEvent } from "voxa";
 import * as _ from "lodash";
+import { IVoxaEvent } from "voxa";
 
 /**
  * Variables are the rendering engine way of adding logic into your views

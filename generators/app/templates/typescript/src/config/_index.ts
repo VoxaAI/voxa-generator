@@ -1,5 +1,7 @@
-import * as path from "path";
+/* tslint:disable:jsdoc-format */
+
 import * as fs from "fs";
+import * as path from "path";
 import _env from "./env";
 
 const env = _env.toLowerCase();

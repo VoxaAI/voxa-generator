@@ -1,12 +1,12 @@
-import * as express from "express";
+/* tslint:disable:no-console */
+
 import * as bodyParser from "body-parser";
-import * as morgan from "morgan";
+import * as express from "express";
 import * as http from "http";
+import * as _ from "lodash";
+import * as morgan from "morgan";
 import * as Raven from "raven";
 import * as uuid from "uuid";
-import * as _ from "lodash";
-import { AlexaPlatform } from "voxa";
-import { RequestEnvelope } from "ask-sdk-model";
 
 Raven.config().install();
 
@@ -72,23 +72,16 @@ _.forEach(
       }
 
       const context = {
-        fail: err => callback(err),
-        succeed: msg => callback(null, msg),
         awsRequestId: uuid.v4(),
-        done: callback
+        done: callback,
+        fail: err => callback(err),
+        succeed: msg => callback(null, msg)
       };
 
-      if (platform instanceof AlexaPlatform) {
-        platform
-          .execute(req.body as RequestEnvelope)
-          .then(context.succeed)
-          .catch(context.fail);
-      } else {
-        platform
-          .execute(req.body)
-          .then(context.succeed)
-          .catch(context.fail);
-      }
+      platform
+        .execute(req.body)
+        .then(context.succeed)
+        .catch(context.fail);
     });
   }
 );

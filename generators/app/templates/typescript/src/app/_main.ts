@@ -1,3 +1,4 @@
+/* tslint:disable:jsdoc-format no-var-requires */
 /**  requires  **/
 // prettier-ignore
 const states = [
