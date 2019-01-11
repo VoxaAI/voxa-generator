@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --recursive test/**/*.spec.js",
     "watch": "nodemon server.js",
-    "lint": "eslint src/ speech-assets/ test/ server.js"
+    "lint": "eslint src/ test/ server.js"
   },
   "author": "<%= author %>",
   "engines": {
@@ -25,22 +25,22 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.3.5",
+    "bluebird": "^3.5.3",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "morgan": "^1.9.1",
     "raven": "^2.6.4",
     "serverless-sentry": "^1.2.0",
     "serverless-sentry-lib": "^1.1.2",
-    "voxa": "3.0.0-alpha39"
+    "voxa": "3.0.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.15.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.12.0",
     "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "mocha": "^3.2.0",
-    "nodemon": "^1.18.7",
+    "eslint-plugin-prettier": "^3.0.1",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
     "prettier": "^1.15.3"
   },
   "directories": {
