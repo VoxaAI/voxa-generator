@@ -235,7 +235,7 @@ module.exports = class PromptHandler {
       this.destinationPath(`server.${this.ext}`)
     );
     this.fs.copy(
-      this.templatePath(`common/serverless.yml`),
+      this.templatePath(`${this.language}/serverless.yml`),
       this.destinationPath("serverless.yml")
     );
   }

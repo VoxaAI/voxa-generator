@@ -13,6 +13,9 @@
 
 service: starter-kit
 
+plugins:
+  - serverless-plugin-typescript
+
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
@@ -20,10 +23,6 @@ service: starter-kit
 provider:
   name: aws
   runtime: nodejs8.10
-<<<<<<< HEAD:generators/app/templates/common/serverless.yml
-=======
-
->>>>>>> dev:generators/app/templates/serverless.yml
 
 functions:
   alexa:
