@@ -1,7 +1,7 @@
 "use strict";
 
 const path = require("path");
-const env = require("./env").toLowerCase();
+const env = process.env.NODE_ENV || "local";
 
 /**  requires  **/
 /**  requires end  **/

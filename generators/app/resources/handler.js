@@ -251,11 +251,6 @@ module.exports = class PromptHandler {
       this.destinationPath(`src/config/index.${this.ext}`)
     );
 
-    this.fs.copy(
-      this.templatePath(`${this.language}/src/config/env.${this.ext}`),
-      this.destinationPath(`src/config/env.${this.ext}`)
-    );
-
     if (this.props.services) {
       _.forEach(this.props.services, item => {
         this.fs.copy(

@@ -2,9 +2,8 @@
 
 import * as fs from "fs";
 import * as path from "path";
-import _env from "./env";
 
-const env = _env.toLowerCase();
+const env = process.env.NODE_ENV || "local";
 
 /**  requires  **/
 /**  requires end  **/
