@@ -7,10 +7,6 @@ module.exports = [
       {
         name: "aws-sdk",
         version: "^2.7.23"
-      },
-      {
-        name: "dynamodb-doc",
-        version: "^1.0.0"
       }
     ],
     config: {

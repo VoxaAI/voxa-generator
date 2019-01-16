@@ -1,15 +1,11 @@
 'use strict';
 
 const config = require('../config');
-const AWS = require('aws-sdk');
-const DOC = require('dynamodb-doc');
+const { DynamoDB } = require('aws-sdk');
 
 class UserStorage {
   constructor() {
-    const dynamodb = new AWS.DynamoDB({
-      apiVersion: '2012-08-10',
-    });
-    this.docClient = new DOC.DynamoDB(dynamodb);
+    this.docClient = new DynamoDB.DocumentClient();
     this.userTable = config.dynamoDB.tables.users;
   }
 

@@ -1,16 +1,12 @@
 import config from "../config";
-import * as AWS from "aws-sdk'";
-import * as DOC from "dynamodb-doc";
+import { DynamoDB } from "aws-sdk'";
 
 export class UserStorage {
-  private docClient: DOC.DynamoDB.DocumentClient
+  private docClient: DynamoDB.DocumentClient
   private userTable: string
 
   constructor() {
-    const dynamodb = new AWS.DynamoDB({
-      apiVersion: '2012-08-10',
-    });
-    this.docClient = new DOC.DynamoDB(dynamodb);
+    this.docClient = new DynamoDB.DocumentClient();
     this.userTable = config.dynamoDB.tables.users;
   }
 
