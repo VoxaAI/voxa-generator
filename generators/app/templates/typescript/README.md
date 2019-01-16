@@ -46,7 +46,7 @@ If none of them are specify Voxa will set it up to local.
 If you need a new environment simply create another json file like `test.json` then setup `NODE_ENV=test`. Voxa will search for `test.json` and apply the configuration.
 
 > Web server will run on default port 3000
-> Use [ngrok](https://ngrok.com/) - secure tunnels for development and test with a real device or a simulators
+> Use [bst proxy](https://bespoken.io/features/#cli) - secure tunnels for development and test with a real device or a simulators
 
 ### Test and Simulators
 
