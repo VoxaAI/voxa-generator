@@ -5,8 +5,8 @@
 First, install [Yeoman](http://yeoman.io) and generator-voxa using [npm](https://www.npmjs.com/).
 
 ```bash
-npm install -g yo
-npm install -g generator-voxa
+yarn global add yo
+yarn global add generator-voxa
 ```
 
 Then generate your new project in the directory that you prefers:
