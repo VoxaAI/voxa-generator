@@ -30,7 +30,6 @@
     "lodash": "^4.17.11",
     "morgan": "^1.9.1",
     "raven": "^2.6.4",
-    "serverless-sentry": "^1.2.0",
     "serverless-sentry-lib": "^1.1.2",
     "voxa": "3.0.0"
   },
@@ -41,7 +40,8 @@
     "eslint-plugin-prettier": "^3.0.1",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.9",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "serverless-sentry": "^1.2.0"
   },
   "directories": {
     "test": "test"
