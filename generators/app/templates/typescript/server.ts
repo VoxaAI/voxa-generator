@@ -13,7 +13,6 @@ Raven.config().install();
 const router = express.Router();
 import {
   alexaSkill,
-  // botframeworkSkill,
   dialogflowAction
 } from "./src/app";
 
@@ -50,7 +49,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 _.forEach(
   {
     alexa: alexaSkill,
-    // botframework: botframeworkSkill,
     dialogflow: dialogflowAction
   },
   (platform, platformPath) => {
