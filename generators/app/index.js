@@ -7,14 +7,14 @@ const Generator = require("yeoman-generator"),
 module.exports = Generator.extend({
   // Configurations will be loaded here.
   // Ask for user input
-  prompting() {
-    return handler.initialPrompt
-      .call(this)
-      .then(answers => handler.secondPrompt.call(this, answers))
-      .then(answers => handler.setPlugins.call(this, answers))
-      .then(answers => handler.thirdPrompt.call(this, answers))
-      .then(answers => handler.finishPrompts.call(this, answers))
-      .then(answers => handler.setNewDestinationRoot.call(this, answers.dir));
+  async prompting() {
+    let answers = await handler.initialPrompt.call(this);
+    answers = await handler.secondPrompt.call(this, answers);
+    answers = await handler.setPlugins.call(this, answers);
+    answers = await handler.thirdPrompt.call(this, answers);
+    answers = await handler.finishPrompts.call(this, answers);
+    answers = await handler.setNewDestinationRoot.call(this, answers.dir);
+    return answers;
   },
 
   // Writing Logic here

@@ -273,6 +273,10 @@ module.exports = class PromptHandler {
       this.templatePath("common/speech-assets"),
       this.destinationPath("speech-assets")
     );
+    this.fs.move(
+      this.destinationPath("speech-assets/alexa/_gitkeep"),
+      this.destinationPath("speech-assets/alexa/.gitkeep")
+    )
     this.fs.copy(
       this.templatePath(`${this.language}/test`),
       this.destinationPath("test")
