@@ -25,15 +25,10 @@ export class UserStorage {
   }
 
   put(data) {
-    return new Promise((resolve, reject) => {
-      this.docClient.putItem({
-        TableName: this.userTable,
-        Item: data,
-      }, (err, item) => {
-        if (err) return reject(err);
-        return resolve(item);
-      });
-    });
+    return this.docClient.putItem({
+      TableName: this.userTable,
+      Item: data,
+    }).promise();
   }
 }
 
