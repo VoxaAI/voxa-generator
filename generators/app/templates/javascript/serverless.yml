@@ -13,9 +13,17 @@
 
 service: starter-kit
 
+plugins:
+  - serverless-sentry
+
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
+
+custom:
+  config: ${file(src/config/index.js):asFunction}
+  sentry:
+    dsn: ${self:custom.config.raven.DSN}
 
 provider:
   name: aws
