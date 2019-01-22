@@ -68,8 +68,7 @@ Voxa uses the debug module internally to log a number of different internal even
 	`app/` -> Amazon Echo Skill login, the state machine and flow
 	`speechAssets/` -> Amazon Echo Utterances, Intent Schema and Custom Slots.
 	`tests/` -> Unit Tests
-	`server.js` -> Development server.
-	`gulpfile.js` -> Gulp tasks
+	`server.ts` -> Development server.
 	`serverless.yml` -> Serverless configuration
 	`package.json` -> Dependencies
 	`README.md`
