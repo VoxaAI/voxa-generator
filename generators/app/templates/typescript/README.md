@@ -65,11 +65,10 @@ Voxa uses the debug module internally to log a number of different internal even
 
 	`config/` -> Environment variables or configuration
 	`services/` -> API clients, Authentications and Extras
-	`skill/` -> Amazon Echo Skill login, the state machine and flow
+	`app/` -> Amazon Echo Skill login, the state machine and flow
 	`speechAssets/` -> Amazon Echo Utterances, Intent Schema and Custom Slots.
 	`tests/` -> Unit Tests
-	`server.js` -> Development server.
-	`gulpfile.js` -> Gulp tasks
+	`server.ts` -> Development server.
 	`serverless.yml` -> Serverless configuration
 	`package.json` -> Dependencies
 	`README.md`
@@ -80,3 +79,5 @@ Voxa uses the debug module internally to log a number of different internal even
   * [Bug Tracker](https://github.com/mediarain/voxa/issues)
   * [Mail List](https://groups.google.com/d/forum/voxa-framework)
   * [IRC](irc://chat.freenode.net/voxa) (chat.freenode.net, #voxa)
+
+

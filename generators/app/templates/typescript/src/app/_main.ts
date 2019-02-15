@@ -1,13 +1,11 @@
-"use strict";
-
+/* tslint:disable:jsdoc-format no-var-requires */
 /**  requires  **/
-/**  requires end  **/
 // prettier-ignore
 const states = [
-  require("./states/launch.states"),
+  require('./states/launch.states'),
 ];
 
-function register(app) {
+export function register(app) {
   states.forEach(state => state.register(app));
 
   // You can also define here the following
@@ -19,5 +17,3 @@ function register(app) {
   /**  plugins  **/
   /**  plugins end  **/
 }
-
-module.exports.register = register;

@@ -1,9 +1,10 @@
-'use strict';
+import config from "../config";
+import { DynamoDB } from "aws-sdk'";
 
-const config = require('../config');
-const { DynamoDB } = require('aws-sdk');
+export class UserStorage {
+  private docClient: DynamoDB.DocumentClient
+  private userTable: string
 
-class UserStorage {
   constructor() {
     this.docClient = new DynamoDB.DocumentClient();
     this.userTable = config.dynamoDB.tables.users;
@@ -24,16 +25,11 @@ class UserStorage {
   }
 
   put(data) {
-    return new Promise((resolve, reject) => {
-      this.docClient.putItem({
-        TableName: this.userTable,
-        Item: data,
-      }, (err, item) => {
-        if (err) return reject(err);
-        return resolve(item);
-      });
-    });
+    return this.docClient.putItem({
+      TableName: this.userTable,
+      Item: data,
+    }).promise();
   }
 }
 
-module.exports = UserStorage;
+exports = UserStorage;

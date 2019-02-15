@@ -1,21 +1,20 @@
-/*eslint no-console: "off"*/
-"use strict";
+/* tslint:disable:no-console */
 
-const express = require("express");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
-const http = require("http");
-const Raven = require("raven");
-const uuid = require("uuid");
-const _ = require("lodash");
+import * as bodyParser from "body-parser";
+import * as express from "express";
+import * as http from "http";
+import * as _ from "lodash";
+import * as morgan from "morgan";
+import * as Raven from "raven";
+import * as uuid from "uuid";
 
 Raven.config().install();
 
-const router = new express.Router();
-const {
+const router = express.Router();
+import {
   alexaSkill,
   dialogflowAction
-} = require("./src/app");
+} from "./src/app";
 
 console.log(
   `${"Attempting to start.\r\n\tNode version: "}${
@@ -61,7 +60,7 @@ _.forEach(
       `Enabling /${platformPath} endpoint for ${platform.constructor.name}.`
     );
     router.post(`/${platformPath}`, (req, res, next) => {
-      function callback(err, msg) {
+      function callback(err, msg?) {
         if (err) {
           console.error(err.message ? err.message : err);
           return next(err);
@@ -71,14 +70,14 @@ _.forEach(
       }
 
       const context = {
-        fail: err => callback(err),
-        succeed: msg => callback(null, msg),
         awsRequestId: uuid.v4(),
-        done: callback
+        done: callback,
+        fail: err => callback(err),
+        succeed: msg => callback(null, msg)
       };
 
       platform
-        .execute(req.body, {})
+        .execute(req.body)
         .then(context.succeed)
         .catch(context.fail);
     });

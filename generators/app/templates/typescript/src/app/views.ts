@@ -1,6 +1,4 @@
-"use strict";
-
-const views = (function views() {
+const views = (() => {
   return {
     Intent: {
       Help: {
@@ -13,7 +11,7 @@ const views = (function views() {
   };
 })();
 
-module.exports = {
+export default {
   en: {
     translation: views
   }
