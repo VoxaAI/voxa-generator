@@ -5,7 +5,9 @@
   "scripts": {
     "test": "istanbul cover _mocha -- --recursive test",
     "eslint": "node_modules/.bin/eslint generators/ test/",
-    "cobertura": "istanbul report cobertura --root coverage"
+    "cobertura": "istanbul report cobertura --root coverage",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": {
     "name": "Rain Agency",
@@ -24,7 +26,8 @@
     "lodash": "^4.17.4",
     "path": "^0.12.7",
     "simple-mock": "^0.7.3",
-    "yeoman-generator": "^1.0.0"
+    "yeoman-generator": "^1.0.0",
+    "snyk": "^1.190.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -46,5 +49,6 @@
     "yeoman-test": "^1.6.0"
   },
   "repository": "mediarain/generator-voxa-skill",
-  "license": "MIT"
+  "license": "MIT",
+  "snyk": true
 }
